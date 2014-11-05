@@ -82,7 +82,7 @@ down = 1
 #start time
 t    = 0
 #end time
-tend = 1e-16 #seconds
+tend = 1e-15 #seconds
 #an empty list to include si values
 si_solutions = []
 
