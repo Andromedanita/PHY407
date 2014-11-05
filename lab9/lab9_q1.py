@@ -26,8 +26,8 @@ def si_initial(x):
     return value
 
 #matrix A entries
-a1 = 1 + (h*(complex(hbar)/(2*M*(a**2))))
-a2 = -h*(complex(hbar)/(4*M*(a**2)))
+a1 = 1 + (h*(1j*(hbar)/(2*M*(a**2))))
+a2 = -h*(1j*(hbar)/(4*M*(a**2)))
 
 #########################################################
 #creating matrix A where n is the dimension of the matrix
@@ -48,13 +48,14 @@ def A(n,a1,a2):
     return np.array([a_sup,a_diag,a_sub])
 
 #matrix B entries
-b1 = 1 - (h*(complex(hbar)/(2*M*(a**2))))
-b2 = h*(complex(hbar)/(4*M*(a**2)))
+b1 = 1 - (h*(1j*(hbar)/(2*M*(a**2))))
+b2 = h*(1j*(hbar)/(4*M*(a**2)))
 
 #defining v matrix as in page 441
 def v(si):
     matrix = np.zeros(len(si),complex)
-    for i in range(len(si)-1):
+    for i in range(1,len(si)-1):
+        print i
         matrix[i] = (b1*si[i]) + b2*(si[i+1]+si[i-1])
     return matrix
 
@@ -67,7 +68,7 @@ si_vals = si_initial(xvalues)
 ###plotting part for animation
 plt.ion()
 fig  = plt.figure()
-ax   = plt.axes(xlim=(0,1e-8))
+ax   = plt.axes(xlim=(0,1.2e-8))
 line = ax.plot(xvalues,si_vals,'-b')
 plt.show()
 
@@ -81,7 +82,7 @@ down = 1
 #start time
 t    = 0
 #end time
-tend = 1e-15 #seconds
+tend = 1e-16 #seconds
 #an empty list to include si values
 si_solutions = []
 

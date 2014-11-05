@@ -37,32 +37,35 @@ b_imag = si_initial(x).imag
 
 alpha  = dst(b_real)
 eta    = dst(b_imag)
-b_k    = alpha + eta
+b_k    = alpha + 1j*eta
 
 k = np.linspace(1,len(b_k),N)
 
 #the arguement inside cos and sin function on page 443
-vals = ((np.pi**2)*(hbar)*(k**2))/(2*(M)*(L**2))
+vals = -((np.pi**2)*(hbar)*(k**2))/(2*(M)*(L**2))
 
 plt.ion()
 fig  = plt.figure()
-ax   = plt.axes(xlim=(0,1e-8))
+ax   = plt.axes(xlim=(0,1.2e-8),ylim=(-1e-7,1e-7))
 line = ax.plot(x,si_initial(x),'-b')
 plt.show()
 
-n    = 100
+
+si_list = []
 t    = 0
-tend = 1e-16 #s
+tend = 1e-15 #s
 while t<tend:
     
     first    = alpha*(np.cos(vals*t))
+    first    = idst(first)
     second   = eta*(np.sin(vals*t))
-    tot      = (first-second)*(np.sin((np.pi*k*n))/N)
-    true_val = idst(tot)
-    real_val = true_val.real
+    second   = idst(second)
+    tot      = (first-second)*(np.sin((np.pi*k*x))/N)
+    si_list.append(tot)
     
-    line[0].set_ydata(real_val)
+    line[0].set_ydata(tot)
     plt.draw()
+    ax.set_title("time={0}".format(t))
     print t
     t +=h
 
