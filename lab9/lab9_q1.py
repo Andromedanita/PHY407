@@ -22,7 +22,7 @@ hbar  = h_planck/(2*np.pi)
 #This has the shape of a gaussian function
 ###########################################
 def si_initial(x):
-    value = np.exp(-((x-x0)**2)/(2*(sigma**2))) * np.exp(1j*kappa*x)
+    value = np.exp(-((x-x0)**2.)/(2.*(sigma**2.))) * np.exp(1j*kappa*x)
     return value
 
 #matrix A entries
@@ -68,7 +68,7 @@ si_vals = si_initial(xvalues)
 ###plotting part for animation
 plt.ion()
 fig  = plt.figure()
-ax   = plt.axes(xlim=(0,1.2e-8))
+ax   = plt.axes(xlim=(0,1e-8))
 line = ax.plot(xvalues,si_vals,'-b')
 plt.show()
 
@@ -86,7 +86,7 @@ tend = 1e-15 #seconds
 #an empty list to include si values
 si_solutions = []
 
-while t<tend:
+while t<tend+h:
     #solving the matrix equation using banded function
     si_new = banded(A,v(si_vals),up,down)
     #appending si values to a list
@@ -95,6 +95,8 @@ while t<tend:
     si_vals = si_new
     
     line[0].set_ydata(si_new)
+    ax.set_title("time={0}".format(t))
+    plt.ylabel("$\psi$")
     plt.draw()
     print t
     t += h
