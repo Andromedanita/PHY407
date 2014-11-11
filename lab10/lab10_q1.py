@@ -1,7 +1,33 @@
 import numpy as np
 import matplotlib.pylab as plt
-from   random import randrange
+from   random import randrange,seed
 
+#########################
+#functions
+#########################
+def move(xp,yp,Lp):
+    
+    rand = randrange(1,5)
+    
+    if rand == 1:
+        yp+=1
+    
+    elif rand==2:
+        yp-=1
+    
+    elif rand==3:
+        xp+=1
+    
+    elif rand==4:
+        xp-=1
+
+    else:
+        print "Something is wrong!"
+
+    return xp,yp
+
+#number of iterations
+N = 10000
 #box size
 L = 101
 
@@ -10,43 +36,30 @@ i = L/2
 j = L/2
 
 #empty lists to hold i and j values
-i_list = []
-j_list = []
+x_list = []
+y_list = []
+#initial condition
+xp = L/2
+yp = L/2
 #appending the initial position values to the list
-i_list.append(i)
-j_list.append(j)
+x_list.append(xp)
+y_list.append(yp)
 
-for k in range(1000):
-    #generating random values for x and y
-    randx = randrange(0,L)
-    randy = randrange(0,L)
-    #setting condition so that particle stays in the box
-    if randx>0 and randy>0:
-        if randx>L-i-1 and randy>L-j-1:
-            i = randx
-            j = randy
-    if randx>0 and randy<0:
-        if randx>L-i-1 and abs(randy)>j-1:
-            i = randx
-            j = randy
-    if randx<0 and randy>0:
-        if abs(randx)>i-1 and randy>L-j-1:
-            i = randx
-            j = randy
-    
-    if randx<0 and randy<0:
-        if abs(randx)>i-1 and abs(randy)>j-1:
-            i = randx
-            j = randy
-    #appending the good x and y positions to the lists
-    i_list.append(i)
-    j_list.append(j)
+#looping over particle position
+for j in range(N):
+    print j
+    x,y = move(xp,yp,L)
+    #changes the random number until its inside the box so that particle does not go outside the box
+    while L<x or x<0 or L<y or y<0:
+        x,y = move(xp,yp,L)
 
-#plotting
+    x_list.append(x)
+    y_list.append(y)
+    xp,yp = x,y
+
 plt.ion()
-plt.figure(figsize=(7,7))
-plt.plot(i_list,j_list)
 plt.plot(L/2,L/2,'ro')
+plt.plot(x_list,y_list,'b')
 plt.plot([0, 0], [0, L], 'm-', lw=2) #4
 plt.plot([0, L], [L, L], 'm-', lw=2) #3
 plt.plot([L, L], [0, L], 'm-', lw=2) #2
@@ -55,4 +68,6 @@ plt.xlim(-1,L+1)
 plt.ylim(-1,L+1)
 plt.xlabel("x")
 plt.ylabel("y")
+plt.title("Random Walk")
 plt.show()
+    
