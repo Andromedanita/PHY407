@@ -6,7 +6,7 @@ import time as tt
 #number of iterations
 N = 10000
 #box size
-L = 101
+L = 25
 
 #initial values of i and j
 i = L/2
@@ -46,35 +46,37 @@ def move(xp,yp,Lp):
     
     return xp,yp
 
+all_x = []
+all_y = []
 
+#while x==L/2 and y==L/2 :
 
-large_xlist = []
-large_ylist = []
+for n in range(30):
+    particle = 'True'
+    x,y = xp,yp
+    print "particle number",n
+    while particle=='True':
+        x,y = move(x,y,L)
+        if x==L or x==0 or y==L or y==0 :
+            all_x.append(x)
+            all_y.append(y)
+            particle = 'False'
+        
+        for i in range(len(all_x)):
+            if (x+1==all_x[i] and y==all_y[i]) or (x-1==all_x[i] and y==all_y[i]) or (x==all_x[i] and y+1==all_y[i]) or (x==all_x[i] and y-1==all_y[i]):
+                
+                all_x.append(x)
+                all_y.append(y)
+                print "hit another particle!"
+                particle = 'False'
 
-for n in range(2):
-    x_list = []
-    y_list = []
-    x_list.append(xp)
-    y_list.append(yp)
-
-    print "new particle number",n
-    for k in range(10000):
-        print k
-        x,y = move(xp,yp,L)
-        while L<x or x<0 or L<y or y<0:
-            x,y = move(xp,yp,L)
-        x_list.append(x)
-        y_list.append(y)
-
-        xp,yp = x,y
-        plt.plot(x,y,'bo')
-        plt.xlim(0,L)
-        plt.ylim(0,L)
-        tt.sleep(0.15)
-        plt.draw()
-        plt.clf()
-    large_xlist.append(x_list)
-    large_ylist.append(y_list)
+        #xp,yp = x,y
+        #plt.plot(x,y,'bo')
+        #plt.xlim(0,L)
+        #plt.ylim(0,L)
+        #tt.sleep(0.001)
+        #plt.draw()
+        #plt.clf()
 
 
 
