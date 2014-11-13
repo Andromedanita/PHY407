@@ -15,7 +15,8 @@ L = 2       #length of side of the cube
 n = 10      #number of dimensions
 V = L**n    #volume of the cube with side L
 N = 1000000 #number of times to run the loop for calculating integral
-
+a = -1.     #lower bound
+b = 1.      #upper bound
 
 #distance of a point in a 10 dimensional hypersphere
 def f(r):
@@ -36,8 +37,11 @@ for i in range(N):
     elif f(r) >1:
         sums+=0
 
+#variance of f
+var = (float(sums)/N)-((float(sums)**2)/(N**2))
+
 #integral value
 I     = float(V)/N * sums
 #error in integral
-error = np.sqrt(I*float((V-I))/N)
+error = (b-a)*(np.sqrt(var)/np.sqrt(N))
 print "The volume of a 10 dimensional hypersphere is:",I,"+/-", error

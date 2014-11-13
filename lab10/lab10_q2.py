@@ -1,128 +1,81 @@
 import numpy as np
 import matplotlib.pylab as plt
-#from   visual import *
 from   random import randrange,random
 import time as tt
 
-#box size
-L = 101
 
-#initial values of i and j
-i = L/2
-j = L/2
+N = 100 #number of iterations
+L = 11  #box size
 
-#empty lists to hold i and j values
-i_list = []
-j_list = []
-#appending the initial position values to the list
-i_list.append(i)#_init)
-j_list.append(j)#_init)
-
+#initial position of particles
+xp = L/2
+yp = L/2
 
 ###plotting part for animation
 plt.ion()
 fig  = plt.figure()
 ax   = plt.axes()
-line = ax.plot(i,j,'-b')
+line = ax.plot(xp,yp,'-b')
 plt.show()
-'''
-##### third trial
-for k in range(100):
-    print k
-    rand = random()
-    if i == L or i == 0 or j == L or j == 0:
-        break
+
+#########################
+#function
+#########################
+def move(xp,yp,Lp):
+    
+    rand = randrange(1,5)
+    
+    if rand == 1:
+        yp+=1
+    
+    elif rand==2:
+        yp-=1
+    
+    elif rand==3:
+        xp+=1
+    
+    elif rand==4:
+        xp-=1
+    
     else:
-        #if random<0.5, moves in x direction
-        if rand<0.5:
-            randx = randrange(0,L)
-            
-            i = randx
-            j=j
-            
-            i_list.append(i)
-            j_list.append(j)
-            plt.plot(i,j,'go')
-            plt.ylim(0,101)
-            plt.xlim(0,101)
-            
-            tt.sleep(0.5)
-            plt.draw()
+        print "Something is wrong!"
+    
+    return xp,yp
+#empty lists to hold final position of each particle
+all_x = []
+all_y = []
 
-        #if random>0.5, moves in y direction
-        elif rand>0.5:
-            randy = randrange(0,L)
-        
-            j = randy
-            i = i
+#looping through N particles
+for n in range(N):
+    particle = 'True'
+    x,y      = xp,yp
+    print "particle number",n
+    #runs until the particle hits boundary or another particle
+    while particle == 'True':
+        x,y = move(x,y,L)   #moving particle randomly
+        #if particles hit the boundary of the box it will stop
+        if x==L or x==0 or y==L or y==0 :
+            all_x.append(x)
+            all_y.append(y)
+            particle = 'False'
+    #checking all the indices of final particle positions
+        for i in range(len(all_x)):
+            #if adding 1 to the position of particles would cause the particle to hit another particle, it would append that position to the list as the final position and makes the particle to be False so that it breaks out of the while loop
+            if (x+1==all_x[i] and y==all_y[i]) or (x-1==all_x[i] and y==all_y[i]) or (x==all_x[i] and y+1==all_y[i]) or (x==all_x[i] and y-1==all_y[i]):
+                
+                all_x.append(x)
+                all_y.append(y)
+                particle = 'False'
 
-            i_list.append(i)
-            j_list.append(j)
-            plt.plot(i,j,'mo')
-            plt.ylim(0,101)
-            plt.xlim(0,101)
-            
-            tt.sleep(0.5)
-            plt.draw()
-'''
-
-##### trial for adding more particles in
-for n in range(5):
-    print "new particle number",n
-    for k in range(100):
-        print k
-        rand = random()
-        if i == L or i == 0 or j == L or j == 0:
-            break
-        else:
-            #if random<0.5, moves in x direction
-            if rand<0.5:
-                randx = randrange(0,L)
-            
-                i = randx
-                j=j
-            
-                i_list.append(i)
-                j_list.append(j)
-                plt.plot(i,j,'go')
-                plt.ylim(0,101)
-                plt.xlim(0,101)
-            
-                tt.sleep(0.5)
-                plt.draw()
-        
-            #if random>0.5, moves in y direction
-            elif rand>0.5:
-                randy = randrange(0,L)
-            
-                j = randy
-                i = i
-            
-                i_list.append(i)
-                j_list.append(j)
-                plt.plot(i,j,'mo')
-                plt.ylim(0,101)
-                plt.xlim(0,101)
-            
-                tt.sleep(0.5)
-                plt.draw()
+        plt.clf()
+        plt.plot(x,y,'bo')
+        plt.plot(all_x,all_y,'ro')
+        plt.xlim(-1,L+1)
+        plt.ylim(-1,L+1)
+        plt.draw()
 
 
 
-'''
-#plotting
-plt.ion()
-plt.figure(figsize=(7,7))
-plt.plot(i_list,j_list)
-plt.plot(L/2,L/2,'ro')
-plt.plot([0, 0], [0, L], 'm-', lw=2) #4
-plt.plot([0, L], [L, L], 'm-', lw=2) #3
-plt.plot([L, L], [0, L], 'm-', lw=2) #2
-plt.plot([0, L], [0, 0], 'm-', lw=2) #1
-plt.xlim(-1,L+1)
-plt.ylim(-1,L+1)
-plt.xlabel("x")
-plt.ylabel("y")
-plt.show()
-'''
+
+
 

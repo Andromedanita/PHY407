@@ -4,8 +4,8 @@ from   random import randrange,random
 import time as tt
 
 
-N = 10000 #number of iterations
-L = 101  #box size
+#N = 10000 #number of iterations
+L = 101 #box size
 
 #initial position of particles (center)
 xp = L/2
@@ -43,6 +43,22 @@ def move(xp,yp,Lp):
     
     return xp,yp
 
+#defining a function to do the checking for other particles adn the middle point
+def check(x,y,all_x,all_y):
+    p = 'True'
+    rr = True
+    for i in range(len(all_x)):
+        #if adding 1 to the position of particles would cause the particle to hit another particle, it would append that position to the list as the final position and makes the particle to be False so that it breaks out of the while loop
+        if (x+1==all_x[i] and y==all_y[i]) or (x-1==all_x[i] and y==all_y[i]) or (x==all_x[i] and y+1==all_y[i]) or (x==all_x[i] and y-1==all_y[i]):
+            all_x.append(x)
+            all_y.append(y)
+            p = 'False'
+            #checking if the particle position is at center then it stops the whole loop (the outer while loop) since it makes r to be False
+        if x == xp and y == yp:
+            rr = False
+    return p, all_x, all_y, rr
+
+
 #empty lists to hold final position of each particle
 all_x = []
 all_y = []
@@ -56,30 +72,19 @@ while r == True:
         x,y = move(x,y,L)  #moving particle randomly
         #if particles hit the boundary of the box it will stop
         
+        particle, all_x, all_y, r = check(x,y,all_x,all_y)
+        
         if x==L or x==0 or y==L or y==0 :
             all_x.append(x)
             all_y.append(y)
             particle = 'False'
         
-        for i in range(len(all_x)):
-            #if adding 1 to the position of particles would cause the particle to hit another particle, it would append that position to the list as the final position and makes the particle to be False so that it breaks out of the while loop
-            if (x+1==all_x[i] and y==all_y[i]) or (x-1==all_x[i] and y==all_y[i]) or (x==all_x[i] and y+1==all_y[i]) or (x==all_x[i] and y-1==all_y[i]):
-                
-                all_x.append(x)
-                all_y.append(y)
-                particle = 'False'
-                #checking if the particle position is at center then it stops the whole loop (the outer while loop) since it makes r to be False
-                if x == xp and y == yp:
-                    r = False
         
-        #plotting
-        plt.clf()
-        plt.plot(x,y,'bo')
-        plt.plot(all_x,all_y,'ro')
-        plt.xlim(-1,L+1)
-        plt.ylim(-1,L+1)
-        #tt.sleep(0.001)
-        
+    #plotting
+    plt.clf()
+    plt.plot(all_x,all_y,'ro')
+    plt.xlim(-1,L+1)
+    plt.ylim(-1,L+1)
     plt.draw()
 
 
