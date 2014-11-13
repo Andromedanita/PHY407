@@ -27,7 +27,7 @@ def move(xp,yp,Lp):
     return xp,yp
 
 #number of iterations
-N = 10000
+N = 5000
 #box size
 L = 101
 
@@ -57,13 +57,15 @@ for j in range(N):
     y_list.append(y)
     xp,yp = x,y
 
+#plotting
 plt.ion()
 plt.plot(L/2,L/2,'ro')
 plt.plot(x_list,y_list,'b')
-plt.plot([0, 0], [0, L], 'm-', lw=2) #4
-plt.plot([0, L], [L, L], 'm-', lw=2) #3
-plt.plot([L, L], [0, L], 'm-', lw=2) #2
-plt.plot([0, L], [0, 0], 'm-', lw=2) #1
+#plotting box 
+plt.plot([0, 0], [0, L], 'g-', lw=2) #4
+plt.plot([0, L], [L, L], 'g-', lw=2) #3
+plt.plot([L, L], [0, L], 'g-', lw=2) #2
+plt.plot([0, L], [0, 0], 'g-', lw=2) #1
 plt.xlim(-1,L+1)
 plt.ylim(-1,L+1)
 plt.xlabel("x")

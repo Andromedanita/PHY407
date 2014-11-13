@@ -1,6 +1,6 @@
-import numpy as np
+import numpy            as np
 import matplotlib.pylab as plt
-from   random import randrange,random
+from   random           import randrange,random
 
 ###############################################
 ##calculating integral using mean value method
@@ -14,20 +14,21 @@ def f(x):
 #start and end point of integration
 a    = 0
 b    = 1
-N    = 10000
-#sums = 0
+N    = 1000
 
+#epmty list to hold
 I_list = []
 for j in range(100):
     sums = 0
     for i in range(N):
-        rand = random()
-        sums += f(rand)
+        rand = random() #random number
+        sums += f(rand) #adding f of random number each time
     I = (float(b-a)/N)*sums
     I_list.append(I)
 
+#plotting
 plt.ion()
-plt.hist(I_list,10,range=[0.8, 0.88])
+plt.hist(I_list,10,range=[0.8, 0.88]) #plotting histogram
 plt.ylabel("number")
 plt.xlabel("I")
 plt.show()
