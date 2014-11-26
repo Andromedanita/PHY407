@@ -10,7 +10,7 @@ J        = 1.0
 T        = 1.0 #temperature
 kb       = 1.0 #Boltzmann constant
 beta     = 1.0/(kb*T)
-num_iter = int(1e5) #number of iterations
+num_iter = int(1e4) #number of iterations
 
 Nx = 20 #x grid dimension
 Ny = 20 #y grid dimension
@@ -69,6 +69,7 @@ for i in range(num_iter):
     #index of array elements chosen randomly
     x = random.randrange(0,Nx)
     y = random.randrange(0,Ny)
+    print x,y
     E_old = energy(s)
     s[x][y] *= - 1
     E_new = energy(s)
@@ -93,6 +94,7 @@ plt.xlabel("time")
 plt.ylabel("energy")
 plt.title("Energy vs. time")
 plt.show()
+
 
 
 
