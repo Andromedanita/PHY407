@@ -10,7 +10,7 @@ J        = 1.0
 T        = 1.0 #temperature
 kb       = 1.0 #Boltzmann constant
 beta     = 1.0/(kb*T)
-num_iter = int(1e4) #number of iterations
+num_iter = int(1e5) #number of iterations
 
 Nx = 20 #x grid dimension
 Ny = 20 #y grid dimension
@@ -66,10 +66,10 @@ magnet_list.append(magnet(s))
 t = []
 t.append(0)
 for i in range(num_iter):
+    print i
     #index of array elements chosen randomly
     x = random.randrange(0,Nx)
     y = random.randrange(0,Ny)
-    print x,y
     E_old = energy(s)
     s[x][y] *= - 1
     E_new = energy(s)
@@ -80,19 +80,18 @@ for i in range(num_iter):
         t.append(i)
     elif accepting == False:
         s[x][y] *= -1
-
-
+xvals = np.where(s == 1)
+yvals = np.where(s == -1)
 plt.ion()
-plt.figure(1)
-plt.plot(t,magnet_list)
-plt.xlabel("time")
-plt.ylabel("magnetization")
-plt.title("Magnetization vs. time")
-plt.figure(2)
-plt.plot(t,energy_list)
-plt.xlabel("time")
-plt.ylabel("energy")
-plt.title("Energy vs. time")
+#plt.clf()
+plt.plot(xvals[0],xvals[1],'b^',markersize=15)
+plt.plot(yvals[0],yvals[1],'rv',markersize=15)
+plt.xlim(-1,20)
+plt.ylim(-1,20)
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("Spins")
+#plt.pause(0.0001)
 plt.show()
 
 
