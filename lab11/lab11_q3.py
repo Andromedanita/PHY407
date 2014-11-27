@@ -29,6 +29,20 @@ def adjacent(i,j):
 def energy(dimers_list):
     E = -len(dimers_list)
     return E
+#defining accepting function
+def acceptance(E1,E2):
+    if E2<E1:
+        return True
+    elif E2>E1:
+        #probability
+        pr = np.exp(-beta*(E2-E1))
+        #choosing a random number to check with the probability distribution
+        ran = random.random()
+        if ran < pr:
+            return True
+        elif ran > pr:
+            return False
+
 
 
 ####################################
@@ -43,13 +57,18 @@ for i in range(Nx):
         points[i][j] =
 
 
-
 for k in range(N):
-    #choosing random x and y
+    #choosing random index for the points of the grid
     xx    = randrange(0,Nx)
     yy    = randrange(0,Nx)
-    x2,y2 = adjacent(xx,yy)
-    
+    #x2,y2 = adjacent(xx,yy)
+    #checking if two points are adjacent
+    if (points[xx][yy]-points[xx+1][yy] ==1) or (points[xx][yy]-points[xx-1][yy] ==1)) or  points[xx][yy]-points[xx][yy+1] ==1) or points[xx][yy]-points[xx][yy-1] ==1):
+        #check if the adjacent points are empty
+        if :
+        #add dimer to the grid points
+        points[][]
+
 
 
 

@@ -84,14 +84,14 @@ for i in range(num_iter):
 plt.ion()
 plt.figure(1)
 plt.plot(t,magnet_list)
-plt.xlabel("time")
+plt.xlabel("Iteration Number")
 plt.ylabel("magnetization")
-plt.title("Magnetization vs. time")
+plt.title("Magnetization vs. step number")
 plt.figure(2)
 plt.plot(t,energy_list)
-plt.xlabel("time")
+plt.xlabel("Iteration Number")
 plt.ylabel("energy")
-plt.title("Energy vs. time")
+plt.title("Energy vs. step number")
 plt.show()
 
 
