@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pylab as plt
-from random import random,randrange
+from   random import random,randrange
 
 ####################################
 #            Constants
@@ -44,30 +44,46 @@ def acceptance(E1,E2):
             return False
 
 
-
 ####################################
 #        Program starts here
 ####################################
 
 #creating a 2D array to hold dimer positions
-points = np.zeros([Nx,Ny])
+#dimers = np.zeros([Nx,Ny])
+dimers = []
 
+#list to hold x,y position of all points in the grid
+grid = []
 for i in range(Nx):
     for j in range(Ny):
-        points[i][j] =
+        grid.append([i,j])
 
 
 for k in range(N):
-    #choosing random index for the points of the grid
+    #choosing random index for the points of the grid(a random point)
     xx    = randrange(0,Nx)
     yy    = randrange(0,Nx)
-    #x2,y2 = adjacent(xx,yy)
-    #checking if two points are adjacent
-    if (points[xx][yy]-points[xx+1][yy] ==1) or (points[xx][yy]-points[xx-1][yy] ==1)) or  points[xx][yy]-points[xx][yy+1] ==1) or points[xx][yy]-points[xx][yy-1] ==1):
-        #check if the adjacent points are empty
-        if :
-        #add dimer to the grid points
-        points[][]
+    #choose random adjacent point to xx,yy point
+    x2,y2 = adjacent(xx,yy)
+    print x2,y2
+    #checking if two points are in the grid(no dimers there)
+    if ([xx,yy] in grid) and ([x2,y2] in grid):
+        #add dimers to the grid
+        dimers.append([xx,yy])
+        dimers.append([x2,y2])
+        #removing these points from the grid so it knows its occupied
+        grid.remove([xx,yy])
+        grid.remove([x2,y2])
+    elif [[xx,yy],[x2,y2]] in dimers:
+        #remove dimer from grid
+
+
+    #elif [[x2,y2],[xx,yy]] in dimers:
+
+    #E_new = energy()
+
+        
+        
 
 
 

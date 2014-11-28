@@ -80,6 +80,20 @@ for i in range(num_iter):
         t.append(i)
     elif accepting == False:
         s[x][y] *= -1
+
+    xvals = np.where(s == 1)
+    yvals = np.where(s == -1)
+    plt.ion()
+    plt.clf()
+    plt.plot(xvals[0],xvals[1],'b^',markersize=15)
+    plt.plot(yvals[0],yvals[1],'rv',markersize=15)
+    plt.xlim(-1,20)
+    plt.ylim(-1,20)
+    plt.pause(0.0001)
+    plt.show()
+
+
+'''
 xvals = np.where(s == 1)
 yvals = np.where(s == -1)
 plt.ion()
@@ -93,7 +107,7 @@ plt.ylabel("y")
 plt.title("Spins")
 #plt.pause(0.0001)
 plt.show()
-
+'''
 
 
 
