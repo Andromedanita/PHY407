@@ -45,27 +45,6 @@ def b_vals(xi_1,yi_1,xi,yi,xip1,yip1):
     return b
 
 
-#function to generate the a matrix, n is number of points
-def gen_matrix(n,a11,a12,a1n_1,a1n,points):
-    a = np.zeros([n,n])
-    a[0][0]   = a11
-    a[0][1]   = a12
-    a[0][2:]  = 0.
-    
-    xi_1 = points[0][0]
-    yi_1 = points[0][1]
-    xi   = points[1][0]
-    yi   = points[1][1]
-    xip1 = points[2][0]
-    yip1 = points[2][1]
-    
-    a[1][:]   = mid_points(xi_1,yi_1,xi,yi,xip1,yip1)
-    a[2][:-2] = 0.0
-    a[2][-2]  = a1n_1
-    a[2][-1]  = a1n
-    return a
-
-
 #function to solve the n+1 equations
 def solver(a,b):
     '''
@@ -121,14 +100,20 @@ b[n-1] = bn
 #generating a and b matrices
 for i in range(1,n-1,1):
     print i
-    print points[i-1][0],points[i-1][1],points[i][0],points[i][1],points[-+1][0],points[i+1][1]
-    a[i][:]   = mid_points(points[i-1][0],points[i-1][1],points[i][0],points[i][1],points[-+1][0],points[i+1][1])
+    a[i][i-1:i+2]   = mid_points(points[i-1][0],points[i-1][1],points[i][0],points[i][1],points[-+1][0],points[i+1][1])
     b[i] = b_vals(points[i-1][0],points[i-1][1],points[i][0],points[i][1],points[-+1][0],       points[i+1][1])
 
 #solving for k values
 k = solver(a,b)
 
 #getting ai and bi values
+ai = np.zeros(n)
+bi = np.zeros(n)
+
+for j in range(1,n,1):
+    ai[j], bi[j] = ab(points[j-1][0],points[j-1][1],points[j][0],points[j][1],k[j-1],k[j])
+
+
 
 
 
