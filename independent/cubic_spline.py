@@ -77,8 +77,8 @@ def t(x,xi_1,xi):
 #----------------------------------------------------------------
 
 #number of points
-n      = 3
-points = np.array([[-1.,0.5],[0.0,0.0],[3.0,3.0]])
+n      = 5
+points = np.array([[-1.,0.5],[0.0,0.0],[1.0,0.5],[2.0,-0.3],[3.0,3.0]])
 a      = np.zeros([n,n])
 b      = np.zeros(n)
 
@@ -115,28 +115,27 @@ bi = np.zeros(n)
 for j in range(1,n,1):
     ai[j], bi[j] = ab(points[j-1][0],points[j-1][1],points[j][0],points[j][1],k[j-1],k[j])
 
-N = 5
+#number of points in xarray
+N = 25
 #an array of x values to get the y values out
-x_array = np.linspace(-0.5,2.0,N)
+x_array = np.linspace(-0.9,2.9,N)
 y_array = np.zeros(N)
 
-find = False
+
 for h in range(len(x_array)):
-    print "x value=",x_array[h]
-    #while find == False:
+    print h
     m = 1
     while m<n:
-        print "in the while loop"
-        for m in range(1,n,1):
-            print "in the for loop"
-            print "m is:",m
-            #check to see if the point is between two points or not
-            if x_array[h]>points[m-1][0] and x_array[h]<points[m][0]:
-                print "xi-1 and xi are:",points[m-1][0],points[m][0]
-                y_array[h] = q(points[m-1][1],points[m][1],ai[m],bi[m],t(x_array[h],points[m-1][0],points[m][0]))
-                #find == True
-            #else:
-            #    break
+        if x_array[h]>points[m-1][0] and x_array[h]<points[m][0]:
+            y_array[h] = q(points[m-1][1],points[m][1],ai[m],bi[m],t(x_array[h],points[m-1][0],points[m][0]))
         m+=1
 
+
+plt.ion()
+plt.plot(x_array,y_array)
+plt.plot(points.T[0],points.T[1],'go')
+plt.xlim(-1.5,3.5)
+plt.ylim(-0.5,3.5)
+
+plt.show()
 
