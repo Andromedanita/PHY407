@@ -115,16 +115,18 @@ bi = np.zeros(n)
 for j in range(1,n,1):
     ai[j], bi[j] = ab(points[j-1][0],points[j-1][1],points[j][0],points[j][1],k[j-1],k[j])
 
+N = 5
 #an array of x values to get the y values out
-#x_array = np.linspace(0.0,10.0,5)
+#x_array = np.linspace(0.0,10.0,N)
+y_array = np.zeros(N)
 
 find = False
 for h in range(len(x_array)):
     while find == False:
-        #check to see if the point is between two points or not
-        if :
-            #return the index of the points
-            find == True
-        l+=1
+        for m in range(n):
+            #check to see if the point is between two points or not
+            if x_array[h]>points[m-1][0] and x_array[h]<points[m][0]:
+                y_array[h] = q(yi_1[][1],yi[][1],ai[],bi[],t):
+                find == True
 
 
