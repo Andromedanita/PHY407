@@ -82,18 +82,19 @@ points = np.array([[-1.,0.5],[0.0,0.0],[3.0,3.0]])
 a      = np.zeros([n,n])
 b      = np.zeros(n)
 
-
 #generating first and last row of the a matrix
 a11,a12,b1    = start_point(points[0][0],
                             points[0][1],points[1][0],points[1][1])
 a1n_1, a1n,bn = end_point(points[n-2][0],
                           points[n-2][1],points[n-1][0],points[n-1][1])
 
+#first and last row of matrix a
 a[0][0]     = a11
 a[0][1]     = a12
 a[n-1][-2]  = a1n_1
 a[n-1][-1]  = a1n
 
+#first and last component of matrix b
 b[0]   = b1
 b[n-1] = bn
 
@@ -106,17 +107,24 @@ for i in range(1,n-1,1):
 #solving for k values
 k = solver(a,b)
 
-#getting ai and bi values
+#ai and bi arrays
 ai = np.zeros(n)
 bi = np.zeros(n)
 
+#computing ai and bi arrays
 for j in range(1,n,1):
     ai[j], bi[j] = ab(points[j-1][0],points[j-1][1],points[j][0],points[j][1],k[j-1],k[j])
 
+#an array of x values to get the y values out
+#x_array = np.linspace(0.0,10.0,5)
 
-
-x_array = np.linspace(1.0,10.0,5)
-
-
+find = False
+for h in range(len(x_array)):
+    while find == True:
+        #check to see if the point is between two points or not
+        if :
+            #return the index of the points
+            find == True
+        l+=1
 
 
