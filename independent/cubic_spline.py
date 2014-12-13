@@ -117,7 +117,7 @@ for j in range(1,n,1):
 
 N = 5
 #an array of x values to get the y values out
-#x_array = np.linspace(0.0,10.0,N)
+x_array = np.linspace(0.0,2.0,N)
 y_array = np.zeros(N)
 
 find = False
@@ -126,7 +126,9 @@ for h in range(len(x_array)):
         for m in range(n):
             #check to see if the point is between two points or not
             if x_array[h]>points[m-1][0] and x_array[h]<points[m][0]:
-                y_array[h] = q(yi_1[][1],yi[][1],ai[],bi[],t):
+                y_array[h] = q(points[m-1][1],points[m][1],ai[m],bi[m],t(x_array[h],points[m-1][0],points[m][0]))
                 find == True
+            else:
+                break
 
 
