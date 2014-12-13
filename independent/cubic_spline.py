@@ -120,7 +120,7 @@ for j in range(1,n,1):
 
 find = False
 for h in range(len(x_array)):
-    while find == True:
+    while find == False:
         #check to see if the point is between two points or not
         if :
             #return the index of the points
