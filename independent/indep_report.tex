@@ -1,0 +1,86 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{rotating}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage{setspace}
+\usepackage[cdot,mediumqspace,]{SIunits}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{authblk}
+\usepackage{placeins}
+\usepackage{float}
+
+\onehalfspacing
+\title{Cubic Spline Interpolation}
+\author{Anita Bahmanyar}
+\affil{\small {Student Number: 998909098}}
+\affil{\small {anita.bahmanyar@mail.utoronto.ca}}
+\date{December 19, 2014}
+
+\usepackage{graphicx}
+
+\renewcommand\thesubsection{\alph{subsection}}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\subsection{Interpolation}
+Interpolation is generating a function based on a few points. This is similar to passing a curve from some points provided. Interpolation is useful in many cases. For instance, when we need the value of a function at many points but calculating those takes a long time, so we can use interpolation in that case. Also, sometimes  we do not need the function value at many points but instead we need to pass an array to the function but the function cannot get array as input due to Python built in functions such as quad function used to integrate. In that case, it is helpful to use interpolation.
+
+\subsection{Cubic Spline Interpolation}
+We need to make sure the curves passing through the points are continuous at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from.
+
+\subsection{Mathematical Approach}
+The aim is to fit a curve passing through points $(x_i,y_i)$ where $i=0,1,...,n$, so we interpolate between points $(x_{i-1},y_{i-1})$ and $(x_i,y_i)$ with polynomials $y_i = q_i(x)$.
+
+%equation
+\begin{equation}
+q_i = (1-t)y_{i_1} + ty_i + t(1-t) (a_i (1-t) +b_it)
+\end{equation}
+
+%equation
+\begin{equation}
+t = \frac{x-x_{i-1}}{x_i - x_{i-1}}
+\end{equation}
+
+%equation
+\begin{equation}
+a_i = k_{i-1} ()x_i-x_{i-1} - (y_i - y_{i-1})
+\end{equation}
+
+%equation
+\begin{equation}
+b_i = -k_i (x_i - x_{i-1}) + (y_i - y_{i-1})
+\end{equation}
+
+In order to have continuous function at all the knots the following condition holds:
+%equation
+\begin{equation}
+\frac{k_{i-1}}{x_i - x_{i-1}} +    \left (    \frac{1}{x_i - x_{i-1}} + \frac{1}{x_{i+1}-x_i} \right ) 2k_i + \frac{k_{i+1}}{x_{i+1}-x_i} = 3  \left(  \frac{y_i - y_{i-1}}{(x_i - x_{i-1})^2} + \frac{y_{i+1}-y_i}{( x_{i+1}-x_i )^2} \right)
+\end{equation}
+for $i=1,2,...,n-1$. This gives us $n-1$ equations including $k_0$, $k_1$, ..., $k_n$.
+
+For the two knots at both ends, the condition is different and we have:
+%equation
+\begin{equation}
+\frac{2}{x_1-x_0}k_0 + \frac{1}{x_1-x_0}k_1 = 3\frac{y_1-y_0}{(x_1-x_0)^2}
+\end{equation}
+
+
+%equation
+\begin{equation}
+\frac{1}{x_n-x_{n-1}}k_{n-1} + \frac{2}{x_n-x_{n-1}}k_n = 3\frac{y_n-y_{n-1}}{(x_n-x_{n-1})^2}
+\end{equation}
+
+These two equations give us 2 more equations and along with the previous $n-1$ equations we would have $n+!$ equations to solve for $k_0,k_1,..,k_n$ values. Then having the values of $k_i$, we can calculate $a_i$ and $b_i$ values to use them for computing $q_i$.
+
+
+\end{document}
+
+
