@@ -2,4 +2,6 @@
 \BOOKMARK [2][-]{subsection.1.1}{Interpolation}{section.1}% 2
 \BOOKMARK [2][-]{subsection.1.2}{Cubic Spline Interpolation}{section.1}% 3
 \BOOKMARK [2][-]{subsection.1.3}{Mathematical Approach}{section.1}% 4
-\BOOKMARK [2][-]{subsection.1.4}{Error Analysis}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{Analysis}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Error Analysis}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Code Analysis}{section.2}% 7

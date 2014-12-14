@@ -114,15 +114,29 @@ t = \frac{x-x_{i-1}}{x_i - x_{i-1}}
 
 This will give us a function q for the points between each two knots, so we will have n different functions for the n+1 knots.
 
+\section{Analysis}
 \subsection{Error Analysis}
 The error in cubic spline interpolation is of order $O(h^4)$. The error would be the maximum difference between the value of the function we are approximating and our interpolated value. The error in cubic spline is given by:
 \begin{equation}
 \left | s-f \right | \sim \frac{5}{384}. \left | f^{(4)} \right |. h^4
 \end{equation}
-where s-f is the difference between interpolated and the function value, $f^{(4)}$ is the value of fourth derivative of the function and h is the spacing between knots.
+where $s-f$ is the difference between interpolated and the function value, $f^{(4)}$ is the value of fourth derivative of the function and h is the spacing between knots.
 For example, if we do the interpolation on the function $y(x) = \sin(x)$ over the interval [0,3] with $h$= 0.1, what would the error be?
 \\We know $f^{(4)}(x)$ = $\sin(x)$; therefore, $f^{(4)}(x) \leq$ 1. So the value of the error would be:
-\\ $\frac{5}{384}.1.(0.1)^4$ $\approx$ $\frac{1}{768000} \approx 1.3 \times 10^{-6}$. This error is very small so the cubic spline interpolation is a good approximation of the function. To see how good it works, I have applied the code to do the interpolation for the $\sin(x)$ function with the knots and interval mentioned above.
+\\ $\frac{5}{384}.1.(0.1)^4$ $\approx$ $\frac{1}{768000} \approx 1.3 \times 10^{-6}$. This error is very small so the cubic spline interpolation is a good approximation of the function. 
+
+Now to see how good it works, I have applied the code to do the interpolation for the function $\sin(x)$ in the interval [0,6.5] with 20 points, so $h$ = 0.325 here. So the error would be $\sim 1.46 \times 10^{-4}$. This is still quite a small error.
+
+\subsection{Code Analysis}
+As you can see in figure 1, the Python built-in interpolation function does a better job in cubic spline interpolation than my code. The zoomed in figure shows that my interpolation is still very close to the actual function even though it differs a bit from the function and the python interpolated function.
+%figure 1	
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.1]{cubic_compared_final.png}
+\caption{Upper: Knots are shown in green dots, red is the actual sin(x) function and blue and green are my interpolated function and Python built-in interpolation function, respectively. Lower: Zoomed in version of the figure above. Python built-in function does a better job in cubic spline interpolation.}
+\end{figure}
+\FloatBarrier
 
 
 
