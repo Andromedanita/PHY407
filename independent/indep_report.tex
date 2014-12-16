@@ -141,6 +141,11 @@ Now to see how good it works, I have applied the code to do the interpolation fo
 Bilinear interpolation is the same as linear interpolation which is extended into two dimensions. Unlike 1D interpolation where you entered $x$ values and got $y=f(x)$ values out, this would require you to enter $x$ and $y$ values to get the value of the function $z = f(x,y)$ out.
 
 \subsubsection{Mathematical Approach}
+$Q_{11} = (x_1,y_1)$, $Q_{12} = (x_1,y_2)$, $Q_{21} = (x_2,y_1)$ and $Q_{22} = (x_2,y_2)$.
+The estimate of the interpolated function would then be:
+\begin{equation}
+f(x,y) = \frac{1}{(x_2-x_1)(y2_y1)} \left ( f(Q_{11})(x_2-x)(y_2-y) + f(Q_{21})(x-x_1)(y2_y) + f(Q_{12})(x_2-x)(y-y_1) + f(Q_{22})(x-x_1)(y-y_1) )\right)
+\end{equation}
 
 \section{Analysis}
 
