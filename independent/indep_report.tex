@@ -42,7 +42,25 @@ This can be considered as the weighted average. The weights are inversely relate
 Since this method only returns equation of lines in between each two points, the more the number of points available, the better the linear interpolation would be.
 The points are simply joined by straight line segments resulting in discontinuities at each point. 
 
+%figure 1
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{lin_sin.png}
+\caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This included 10 knots.}
+\end{figure}
+\FloatBarrier
+The interpolated values using Scipy linear 1d interpolation is very similar to the values I got from my linear interpolation code.The mean value of the difference between the Python linear interpolation and my interpolation method is $\sim 1.735 \times 10^{-17}$. Linear interpolation just gives us an overall shape of the function, it is not very accurate since it only uses straight lines between each points, so it would not be a smooth function. However, as we add more knots it would seem smoother and more similar to the actual function.
 
+%figure 2
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{lin_sin_morepoints.png}
+\caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This is similar to previous figure except this is with more knots. This has 20 knots rather than 10 in the previous figure. We can see that the interpolated curves are getting closer to the function.}
+\end{figure}
+\FloatBarrier
+Figure 2 shows that as we add more knots, the interpolated curves get more similar to the function because the line segments get smaller and more accurate between points with increasing number of knots.
 
 \subsection{Cubic Spline Interpolation}
 Cubic spline interpolation is a more accurate and advanced way of fitting a curve to data points than the linear interpolation. We need to make sure the curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from.
@@ -152,7 +170,7 @@ f(x,y) = \frac{1}{(x_2-x_1)(y2_y1)} \left ( f(Q_{11})(x_2-x)(y_2-y) + f(Q_{21})(
 
 \subsection{Code Analysis}
 As you can see in figure 1, the Python built-in interpolation function does a better job in cubic spline interpolation than my code. The zoomed in figure shows that my interpolation is still very close to the actual function even though it differs a bit from the function and the python interpolated function.
-%figure 1	
+%figure 2	
 \FloatBarrier
 \begin{figure}[H]
 \centering
