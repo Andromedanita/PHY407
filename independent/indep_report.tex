@@ -15,7 +15,7 @@
 \usepackage{float}
 
 \onehalfspacing
-\title{Cubic Spline Interpolation}
+\title{Functional Analysis: Interpolation}
 \author{Anita Bahmanyar}
 \affil{\small {Student Number: 998909098}}
 \affil{\small {anita.bahmanyar@mail.utoronto.ca}}
@@ -30,13 +30,22 @@
 \maketitle
 
 \section{Introduction}
-\subsection{Interpolation}
 Interpolation is generating a function based on a few points. This is similar to passing a curve from some points provided. Interpolation is useful in many cases. For instance, when we need the value of a function at many points but calculating those takes a long time, so we can use interpolation in that case. Also, sometimes  we do not need the function value at many points but instead we need to pass an array to the function but the function cannot get array as input due to Python built in functions such as quad function used to integrate. In that case, it is helpful to use interpolation.
 
-\subsection{Cubic Spline Interpolation}
-We need to make sure the curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from.
+\section{Interpolation Types}
+\subsection{Linear Interpolation}
+Linear interpolation is a method to fit a curve to the points using linear functions. if we know the coordinate of two points as $(x_0,y_0)$ and $(x_1,y_1)$, the linear interpolation between these two points would just be a straight line. The equation of a straight line is given by
+\begin{equation}
+y = y_0 +\frac{x-x_0}{x_1-x_0}
+\end{equation}
+This can be considered as the weighted average. The weights are inversely related to the distance from the end points to the unknown point; the closer point has more influence than the farther point. 
 
-\subsection{Mathematical Approach}
+
+
+\subsection{Cubic Spline Interpolation}
+Cubic spline interpolation is a more accurate and advanced way of fitting a curve to data points than the linear interpolation. We need to make sure the curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from.
+
+\subsubsection{Mathematical Approach}
 The aim is to fit a curve passing through points $(x_i,y_i)$ where $i=0,1,...,n$, so we interpolate between points $(x_{i-1},y_{i-1})$ and $(x_i,y_i)$ with polynomials $y_i = q_i(x)$.
 
 
@@ -114,8 +123,8 @@ t = \frac{x-x_{i-1}}{x_i - x_{i-1}}
 
 This will give us a function q for the points between each two knots, so we will have n different functions for the n+1 knots.
 
-\section{Analysis}
-\subsection{Error Analysis}
+
+\subsubsection{Error Analysis}
 The error in cubic spline interpolation is of order $O(h^4)$. The error would be the maximum difference between the value of the function we are approximating and our interpolated value. The error in cubic spline is given by:
 \begin{equation}
 \left | s-f \right | \sim \frac{5}{384}. \left | f^{(4)} \right |. h^4
@@ -126,6 +135,8 @@ For example, if we do the interpolation on the function $y(x) = \sin(x)$ over th
 \\ $\frac{5}{384}.1.(0.1)^4$ $\approx$ $\frac{1}{768000} \approx 1.3 \times 10^{-6}$. This error is very small so the cubic spline interpolation is a good approximation of the function. 
 
 Now to see how good it works, I have applied the code to do the interpolation for the function $\sin(x)$ in the interval [0,6.5] with 20 points, so $h$ = 0.325 here. So the error would be $\sim 1.46 \times 10^{-4}$. This is still quite a small error.
+
+\section{Analysis}
 
 \subsection{Code Analysis}
 As you can see in figure 1, the Python built-in interpolation function does a better job in cubic spline interpolation than my code. The zoomed in figure shows that my interpolation is still very close to the actual function even though it differs a bit from the function and the python interpolated function.
@@ -138,7 +149,7 @@ As you can see in figure 1, the Python built-in interpolation function does a be
 \end{figure}
 \FloatBarrier
 
-
+\subsection{Bilinear Interpolation}
 
 \end{document}
 
