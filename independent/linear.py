@@ -19,9 +19,9 @@ def lin_interp(x,x0,y0,x1,y1):
 #-----------------------------------------------------------
 #                       Code Starts Here
 #-----------------------------------------------------------
-x_array = np.linspace(0.,6.5,10)
+x_array = np.linspace(0.,6.5,20)
 y_array = np.sin(x_array)
-xvals   = np.linspace(0.1,6.4,20)
+xvals   = np.linspace(0.01,6.49,30)
 
 
 
@@ -44,11 +44,11 @@ py_interp = f(xvals)
 #plotting
 plt.ion()
 plt.plot(x_array,y_array,'bo')
+plt.plot(xvals,py_interp,'c')
 plt.plot(xvals,yvals,'r')
-plt.plot(xvals,py_interp,'m')
 plt.plot(xvals,np.sin(xvals),'g')
 plt.xlabel("x")
 plt.ylabel("y")
-plt.legend(("knots","my interpolated values","python interpolated values","Actual function"),loc='best')
+plt.legend(("knots","python interpolated values","my interpolated values","Actual function"),loc='best')
 
 plt.show()

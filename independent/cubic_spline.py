@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pylab as plt
+from   scipy import interpolate
 
 #----------------------------------------------------------------
 #                         Functions
@@ -79,6 +80,10 @@ def t(x,xi_1,xi):
 #number of points
 n      = 5
 points = np.array([[-1.,0.5],[0.0,0.0],[1.0,0.5],[2.0,-0.3],[3.0,3.0]])
+xx = np.linspace(0.0,6.5,n)
+yy = np.sin(xx)
+#points = np.array([[xx[0],yy[0]],[xx[1],yy[1]],[xx[2],yy[2]],[xx[3],yy[3]],[xx[4],yy[4]],[xx[5],yy[5]],[xx[6],yy[6]],[xx[7],yy[7]],[xx[8],yy[8]],[xx[9],yy[9]],[xx[10],yy[10]],[xx[11],yy[11]],[xx[12],yy[12]],[xx[13],yy[13]],[xx[14],yy[14]],[xx[15],yy[15]],[xx[16],yy[16]],[xx[17],yy[17]],[xx[18],yy[18]],[xx[19],yy[19]]])
+
 a      = np.zeros([n,n])
 b      = np.zeros(n)
 
@@ -118,7 +123,7 @@ for j in range(1,n,1):
 #number of points in xarray
 N = 25
 #an array of x values to get the y values out
-x_array = np.linspace(-0.9,2.9,N)
+x_array = np.linspace(-0.99,2.99,N)
 y_array = np.zeros(N)
 
 
@@ -131,11 +136,20 @@ for h in range(len(x_array)):
         m+=1
 
 
-plt.ion()
-plt.plot(x_array,y_array)
-plt.plot(points.T[0],points.T[1],'go')
-plt.xlim(-1.5,3.5)
-plt.ylim(-0.5,3.5)
+#actual_func = np.sin(x_array)
+#o = interpolate.interp1d(points.T[0],points.T[1],kind='cubic')
+#py_interp = o(x_array)
 
+plt.ion()
+plt.plot(points.T[0],points.T[1],'go')
+plt.plot(x_array,y_array)
+#plt.plot(x_array,py_interp)
+#plt.plot(x_array,actual_func)
+plt.xlim(-1.5,3.7)
+plt.ylim(-1.5,3.5)
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend(("knots","interpolated function","python interpolation","sin(x) function"),loc='best')
+plt.title("Interpolation of sin(x) function")
 plt.show()
 
