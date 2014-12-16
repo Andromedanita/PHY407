@@ -4,6 +4,7 @@
 \BOOKMARK [2][-]{subsection.2.2}{Cubic Spline Interpolation}{section.2}% 4
 \BOOKMARK [3][-]{subsubsection.2.2.1}{Mathematical Approach}{subsection.2.2}% 5
 \BOOKMARK [3][-]{subsubsection.2.2.2}{Error Analysis}{subsection.2.2}% 6
-\BOOKMARK [1][-]{section.3}{Analysis}{}% 7
-\BOOKMARK [2][-]{subsection.3.1}{Code Analysis}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.2}{Bilinear Interpolation}{section.3}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Bilinear Interpolation}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Mathematical Approach}{subsection.2.3}% 8
+\BOOKMARK [1][-]{section.3}{Analysis}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{Code Analysis}{section.3}% 10

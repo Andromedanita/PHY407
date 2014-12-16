@@ -39,6 +39,7 @@ Linear interpolation is a method to fit a curve to the points using linear funct
 y = y_0 +\frac{x-x_0}{x_1-x_0}
 \end{equation}
 This can be considered as the weighted average. The weights are inversely related to the distance from the end points to the unknown point; the closer point has more influence than the farther point. 
+Since this method only returns equation of lines in between each two points, the more the number of points available, the better the linear interpolation would be.
 
 
 
@@ -136,6 +137,11 @@ For example, if we do the interpolation on the function $y(x) = \sin(x)$ over th
 
 Now to see how good it works, I have applied the code to do the interpolation for the function $\sin(x)$ in the interval [0,6.5] with 20 points, so $h$ = 0.325 here. So the error would be $\sim 1.46 \times 10^{-4}$. This is still quite a small error.
 
+\subsection{Bilinear Interpolation}
+Bilinear interpolation is the same as linear interpolation which is extended into two dimensions. Unlike 1D interpolation where you entered $x$ values and got $y=f(x)$ values out, this would require you to enter $x$ and $y$ values to get the value of the function $z = f(x,y)$ out.
+
+\subsubsection{Mathematical Approach}
+
 \section{Analysis}
 
 \subsection{Code Analysis}
@@ -149,7 +155,6 @@ As you can see in figure 1, the Python built-in interpolation function does a be
 \end{figure}
 \FloatBarrier
 
-\subsection{Bilinear Interpolation}
 
 \end{document}
 
