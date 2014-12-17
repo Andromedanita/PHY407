@@ -30,19 +30,30 @@
 \maketitle
 
 \section{Introduction}
-Interpolation is generating a function based on a few points. This is similar to passing a curve from some points provided. Interpolation is useful in many cases. For instance, when we need the value of a function at many points but calculating those takes a long time, so we can use interpolation in that case. Also, sometimes  we do not need the function value at many points but instead we need to pass an array to the function but the function cannot get array as input due to Python built in functions such as quad function used to integrate. In that case, it is helpful to use interpolation.
+It is common to know the value of a function at a few points and wanting to know the value of the function at the points in between. Interpolation is the name given to the method for finding such a value. This is similar to passing a curve from some points provided. There is one other case where interpolation becomes handy. Some of the python built-in functions such as quad which is for integrating functions only gets single values. If we want to pass an array to the quad function it would raise an error. In that case, it is easier to pass some of the values from the quad function and interpolate the values in between the points so that we may pass arrays to the function.
 
 \section{Interpolation Types}
 \subsection{Linear Interpolation}
-Linear interpolation is the simplest way of getting the values between points. Linear interpolation is a method to fit a curve to the points using linear functions. if we know the coordinate of two points as $(x_0,y_0)$ and $(x_1,y_1)$, the linear interpolation between these two points would just be a straight line. The equation of a straight line is given by
+Linear interpolation is the simplest way of getting the values of a function in between points. Linear interpolation is a method to fit a curve to the points using linear functions. If we know the coordinates of two points as $A=(x_0,y_0)$ and $B=(x_1,y_1)$, the linear interpolation between these two points would simply be a straight line. Figure 1 shows the schematic view of the interpolation.
+
+%figure 1
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{linear_plot.png}
+\caption{Linear interpolation gives the value of point $C=(x_2,y_2)$.}
+\end{figure}
+\FloatBarrier
+The equation of a straight line is given by:
 \begin{equation}
 y = y_0 +\frac{x-x_0}{x_1-x_0}
 \end{equation}
+Therefore, having the values of the points A and B, we can compute the value of $y_2$ given the value of $x_2$.
 This can be considered as the weighted average. The weights are inversely related to the distance from the end points to the unknown point; the closer point has more influence than the farther point. 
 Since this method only returns equation of lines in between each two points, the more the number of points available, the better the linear interpolation would be.
 The points are simply joined by straight line segments resulting in discontinuities at each point. 
 
-%figure 1
+%figure 2
 \FloatBarrier
 \begin{figure}[H]
 \centering
@@ -199,6 +210,11 @@ As you can see in figure 1, the Python built-in interpolation function does a be
 \end{figure}
 \FloatBarrier
 
+\section{References}
+1-http://bmia.bmt.tue.nl/people/BRomeny/Courses/8C080/Interpolation.pdf
+\\2-http://en.wikipedia.org/wiki/Linear\_interpolation
+\\3-http://en.wikipedia.org/wiki/Bilinear\_interpolation
+\\4-http://en.wikipedia.org/wiki/Spline\_interpolation
 
 \end{document}
 
