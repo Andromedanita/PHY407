@@ -71,7 +71,7 @@ The interpolated values using Scipy linear 1d interpolation is very similar to t
 \caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This is similar to previous figure except this is with more knots. This has 20 knots rather than 10 in the previous figure. We can see that the interpolated curves are getting closer to the function.}
 \end{figure}
 \FloatBarrier
-Figure 2 shows that as we add more knots, the interpolated curves get more similar to the function because the line segments get smaller and more accurate between points with increasing number of knots.
+Figure 3 shows that as we add more knots, the interpolated curves get more similar to the function because the line segments get smaller and more accurate between points with increasing number of knots.
 
 \subsection{Cubic Spline Interpolation}
 Cubic spline interpolation is a more accurate and advanced way of fitting a curve to data points than the linear interpolation. We need to make sure the curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from.
@@ -177,30 +177,55 @@ For example, if we do the interpolation on the function $y(x) = \sin(x)$ over th
 Now to see how good it works, I have applied the code to do the interpolation for the function $\sin(x)$ in the interval [0,6.5] with 20 points, so $h$ = 0.325 here. So the error would be $\sim 1.46 \times 10^{-4}$. This is still quite a small error.
 
 \subsection{Bilinear Interpolation}
-Bilinear interpolation is the same as linear interpolation which is extended into two dimensions. Unlike 1D interpolation where you entered $x$ values and got $y=f(x)$ values out, this would require you to enter $x$ and $y$ values to get the value of the function $z = f(x,y)$ out.
+Bilinear interpolation is the same as linear interpolation which is extended into two dimensions. Unlike 1D interpolation where you entered $x$ values and got $y=f(x)$ values out, this would require you to enter $x$ and $y$ values to get the value of the function $z = f(x,y)$ out. Figure 5 shows a schematic view of bilinear interpolation.
+
+%figure 5
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{bilinear_plot.png}
+\caption{The red points show the knots and the green point P is the point we want its value.}
+\end{figure}
+\FloatBarrier
+
 
 \subsubsection{Mathematical Approach}
-$Q_{11} = (x_1,y_1)$, $Q_{12} = (x_1,y_2)$, $Q_{21} = (x_2,y_1)$ and $Q_{22} = (x_2,y_2)$.
-The estimate of the interpolated function would then be:
+The four points indicated by red dots in figure 5 have the values of:
+\\$Q_{11} = (x_1,y_1)$, $Q_{12} = (x_1,y_2)$, $Q_{21} = (x_2,y_1)$ and $Q_{22} = (x_2,y_2)$. Also, the blue dots in figure 5 are $R_1=(x,y_1)$ and $R_2=(x,y_2)$. The green dot is the point where we want to find the value $P=(x,y)$.
+\\Doing linear interpolation in x-direction first would give us:
 \begin{equation}
-f(x,y) = \frac{1}{(x_2-x_1)(y_2-y_1)} \left ( f(Q_{11})(x_2-x)(y_2-y) + 
-\\f(Q_{21})(x-x_1)(y_2-y) + 
-\\f(Q_{12})(x_2-x)(y-y_1) + 
-\\f(Q_{22})(x-x_1)(y-y_1) )\right)
+f(R_1) \approx \frac{x_2-x}{x_2-x_1}f(Q_{11}) + \frac{x-x_1}{x_2-x_1}f(Q_{21})
 \end{equation}
-
+and
+\begin{equation}
+f(R_2) \approx  \frac{x_2-x}{x_2-x_1}f(Q_{12}) + \frac{x-x_1}{x_2-x_1}f(Q_{22})
+\end{equation}
+Then we continue the interpolation in y direction which gives u:
+\begin{equation}
+f(P) \approx \frac{y_2-y}{y_2-y_1}f(R_1) + \frac{y-y_!}{y_2-y_1}f(R_2)
+\end{equation}
+Finally, the estimate of the interpolated function would be:
 \begin{eqnarray}
-f(x,y) = \frac{1}{(x_2-x_1)(y_2-y_1)} \left ( f(Q_{11})(x_2-x)(y_2-y) + 
+f(x,y) \approx \frac{1}{(x_2-x_1)(y_2-y_1)} \left ( f(Q_{11})(x_2-x)(y_2-y) + 
 \\f(Q_{21})(x-x_1)(y_2-y) + 
 \\f(Q_{12})(x_2-x)(y-y_1) + 
 \\f(Q_{22})(x-x_1)(y-y_1) )\right)
 \end{eqnarray}
+This could have been done by doing the linear interpolation first in y direction and then in x direction without any change in the result. This kind of interpolation is linear in x and in y direction separately but not as a whole despite its name.
 
-
+%figure of colours
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{bilinear_plot2.png}
+\caption{The value of the function at point $P=(x,y)$ is the value of each coloured point multiplied by the area of the same colour divided by the area of ABCD rectangle to normalize it.}
+\end{figure}
+\FloatBarrier
 \section{Analysis}
 
 \subsection{Code Analysis}
 As you can see in figure 1, the Python built-in interpolation function does a better job in cubic spline interpolation than my code. The zoomed in figure shows that my interpolation is still very close to the actual function even though it differs a bit from the function and the python interpolated function.
+\\Figure 6 shows another schematic view of bilinear interpolation to demonstrate the mathematical part of it better.
 %figure 2	
 \FloatBarrier
 \begin{figure}[H]
