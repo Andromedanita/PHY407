@@ -46,7 +46,7 @@ Linear interpolation is the simplest way of getting the values of a function in 
 \FloatBarrier
 The equation of a straight line is given by:
 \begin{equation}
-y = y_0 +\frac{x-x_0}{x_1-x_0}
+y = y_0 +\frac{(x-x_0)(y_1-y_0)}{x_1-x_0}
 \end{equation}
 Therefore, having the values of the points A and B, we can compute the value of $y_2$ given the value of $x_2$.
 This can be considered as the weighted average. The weights are inversely related to the distance from the end points to the unknown point; the closer point has more influence than the farther point. 
@@ -81,7 +81,7 @@ Cubic spline interpolation is a more accurate and advanced way of fitting a curv
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{interp_arbitrary.png}
-\caption{Interpolation of 5 arbitrary points using cubic spline method.}
+\caption{Interpolation of 5 arbitrary points using my code for cubic spline interpolation.}
 \end{figure}
 \FloatBarrier
 
