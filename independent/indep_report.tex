@@ -30,7 +30,7 @@
 \maketitle
 
 \section{Introduction}
-Most of the times in physics we are given a few data points and we need to estimate values of our model between these points. The method commonly used to solve this problem is interpolation. This is similar to passing a curve from some points provided. There is one other case where interpolation becomes handy. Some of the python built-in functions such as quad which is for integrating functions only gets single values. If we want to pass an array to the quad function it would raise an error. In that case, it is easier to pass some of the values from the quad function and interpolate the values in between the points so that we may pass arrays to the function.
+Most of the times in physics we are often given a few data points by sampling and experimenting and we need to estimate the values of our model between these points. The method commonly used to solve this problem in numerical analysis is interpolation. This is only an estimation. Interpolation is passing a curve from all the data points. There is one other case where interpolation becomes handy. For instance, we have a very complicated function to evaluate and if we want to evaluate it at all the points we want, it would take a long time to compute it and it is not efficient. In that case, we can take advantage of interpolation to estimate the value of the function at the points we want given a few points. This estimation for such a complex function might not be very accurate but the amount of computational time we save is much better than the accuracy we lose.
 
 \section{Interpolation Types}
 \subsection{Linear Interpolation}
@@ -95,6 +95,11 @@ where $P_1(x)$ is the interpolation function in the interval $[a,b]$ and $c_x$ i
 \begin{equation}
 f(x)-P_1(x) = \frac{1}{2}(x-b)(x-a)f''(x)+...
 \end{equation}
+To give a rough estimate of the error in the $\sin(x)$ function using 20 knots and 30 points in between the knots, take the following assumptions:
+\\$a=0$
+\\$b=0.34210526$
+\\$u_x=0.23344828$
+\\Therefore, the error would be $\sim 0.003$
 
 \subsection{Cubic Spline Interpolation}
 Cubic spline interpolation is a more accurate and advanced way of fitting a curve to data points than the linear interpolation. We need to make sure the piecewise curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from. \subsubsection{Mathematical Approach}
@@ -278,7 +283,7 @@ Figure below shows an example of running my code for bilinear interpolation. The
 
 
 \section{Analysis}
-In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figure below shows the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. No matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function.
+In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figure below shows the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. No matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of step function linear interpolation does a better job both in the case of my code and scipy code.
 
 \FloatBarrier
 \begin{figure}[H]
@@ -297,6 +302,16 @@ In this section, I will test my code for different functions and compare it with
 \FloatBarrier
 Also, we can see that my cubic spline interpolation code fails to fit a curve to the step function knots.
 
+%exponential plot
+\FloatBarrier
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.45]{exponential.png}
+\caption{$e^{(-4x^2)}$ along with linear and cubic spline interpolation using both my code and scipy. The linear interpolation using my code and scipy do match up exactly while the cubic spline interpolations differ.}
+\end{figure}
+\FloatBarrier
+
+
 \section{Conclusion}
 Cubic spline interpolation approximates the curve between data points much better than linear interpolation. The error in linear interpolation is of order two while the error in cubic spline interpolation is of order four. 
 Generalization of the error in polynomial interpolation:
@@ -313,6 +328,7 @@ where $u_x$ is a point in the interval of interpolation.
 \\4-http://en.wikipedia.org/wiki/Spline\_interpolation
 \\5-http://homepage.math.uiowa.edu/~atkinson/ftp/ENA\_Materials/Overheads/sec\_4-2.pdf
 \\6-http://www-solar.mcs.st-andrews.ac.uk/~clare/Lectures/num-analysis/Numan\_chap3.pdf
+\\7-http://en.wikipedia.org/wiki/Interpolation
 
 \end{document}
 
