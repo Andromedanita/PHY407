@@ -285,7 +285,7 @@ Figure 8 shows an example of running my code for bilinear interpolation. The fou
 
 
 \section{Analysis}
-In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figures 9 and 10 show the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. No matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of step function linear interpolation does a better job both in the case of my code and scipy code.
+In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figures 9 and 10 show the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. However, no matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of step function linear interpolation does a better job both in the case of my code and scipy code and the scipy does a better job in cubic interpolation than my code.
 
 \FloatBarrier
 \begin{figure}[H]
@@ -302,14 +302,15 @@ In this section, I will test my code for different functions and compare it with
 \caption{15 knots and 100 points in between.}
 \end{figure}
 \FloatBarrier
-Also, we can see that my cubic spline interpolation code fails to fit a curve to the step function knots.
+
+Figure 11 shows the function $e^{-4x^2}$ and the interpolated values. My cubic spline interpolation is not as good as scipy cubic interpolation, while both mine and scipy linear interpolation curves match up and are the same.
 
 %exponential plot
 \FloatBarrier
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.45]{exponential.png}
-\caption{$e^{(-4x^2)}$ along with linear and cubic spline interpolation using both my code and scipy. The linear interpolation using my code and scipy do match up exactly while the cubic spline interpolations differ.}
+\caption{$e^{4x^2}$ function along with linear and cubic spline interpolation using both my code and scipy. The linear interpolation using my code and scipy do match up exactly while the cubic spline interpolations differ.}
 \end{figure}
 \FloatBarrier
 
