@@ -1,3 +1,7 @@
+'''
+Anita Bahmanyar
+Comparing linear and cubic interpolation methods using my and scipy module for step function.
+'''
 import numpy as np
 import matplotlib.pylab as plt
 from   scipy import interpolate
@@ -15,7 +19,6 @@ def step(x):
     else:
         return 1.
 
-
 #-----------------------------------------------------------
 #                       Code Starts Here
 #-----------------------------------------------------------
@@ -23,15 +26,20 @@ N       = 15 #length of x,y array
 x_array = np.linspace(0.,4,N)
 y_array = np.zeros(len(x_array))
 
+#-----------------------------------------------------------
+#                    Linear Interpolation
+#-----------------------------------------------------------
+#giving y_array step function values
 for k in range(len(x_array)):
     y_array[k] = step(x_array[k])
 
-xvals   = np.linspace(0.01,3.99,100)
-
-
-N = len(xvals)
+#number of points between knots
+num   = 20
+xvals = np.linspace(0.01,3.99,num)
+N     = len(xvals)
 yvals = np.zeros(N)
 
+#assigning interpolated values to yvals
 for h in range(len(xvals)):
     print h
     m = 0
@@ -40,13 +48,30 @@ for h in range(len(xvals)):
             yvals[h] = lin_interp(xvals[h],x_array[m],y_array[m],x_array[m+1],y_array[m+1])
         m+=1
 
+#scipy linear interpolation function
+f  = interpolate.interp1d(x_array,y_array,kind='linear')
+#scipy cubic interpolation function
+ff = interpolate.interp1d(x_array,y_array,kind='cubic')
+#scipy linear interpolation values
+py_interp_lin = f(xvals)
+#scipy cubic interpolation values
+py_interp_cub = ff(xvals)
 
-#####cubic
-n = 5
-points = np.array([[x_array[0],y_array[0]],[x_array[1],y_array[1]],[x_array[2],y_array[2]],[x_array[3],y_array[3]],[x_array[4],y_array[4]]])
 
+plt.ion()
+plt.plot(x_array,y_array,'bo')
+plt.plot(x_array,y_array,'b')
+plt.plot(xvals,py_interp_lin,'g')
+plt.plot(xvals,yvals,'r')
+plt.plot(xvals,py_interp_cub,'m')
 
+#-----------------------------------------------------------
+#                   Cubic Spline Interpolation
+#-----------------------------------------------------------
+n = 15
+points = np.array([[x_array[0],y_array[0]],[x_array[1],y_array[1]],[x_array[2],y_array[2]],[x_array[3],y_array[3]],[x_array[4],y_array[4]],[x_array[5],y_array[5]],[x_array[6],y_array[6]],[x_array[7],y_array[7]],[x_array[8],y_array[8]],[x_array[9],y_array[9]],[x_array[10],y_array[10]],[x_array[11],y_array[11]],[x_array[12],y_array[12]],[x_array[13],y_array[13]],[x_array[14],y_array[14]]])
 
+#a and b arrays
 a      = np.zeros([n,n])
 b      = np.zeros(n)
 
@@ -83,37 +108,28 @@ bi = np.zeros(n)
 for j in range(1,n,1):
     ai[j], bi[j] = ab(points[j-1][0],points[j-1][1],points[j][0],points[j][1],k[j-1],k[j])
 
-y_arrayy = np.zeros(len(x_array))
+N = 55
+#an array of x values to get the y values out
+x_array = np.linspace(0.01,3.99,N)
+y_array = np.zeros(N)
+
 
 for h in range(len(x_array)):
     print h
     m = 1
     while m<n:
         if x_array[h]>points[m-1][0] and x_array[h]<points[m][0]:
-            y_arrayy[h] = q(points[m-1][1],points[m][1],ai[m],bi[m],t(x_array[h],points[m-1][0],points[m][0]))
+            y_array[h] = q(points[m-1][1],points[m][1],ai[m],bi[m],t(x_array[h],points[m-1][0],points[m][0]))
         m+=1
 
 
-#######################
-
-f  = interpolate.interp1d(x_array,y_array,kind='linear')
-ff = interpolate.interp1d(x_array,y_array,kind='cubic')
-py_interp_lin = f(xvals)
-py_interp_cub = ff(xvals)
-
-#plotting
-plt.ion()
-plt.plot(x_array,y_array,'bo')
-plt.plot(x_array,y_array,'b')
-plt.plot(xvals,py_interp_lin,'g')
-plt.plot(xvals,yvals,'r')
-plt.plot(xvals,py_interp_cub,'m')
-plt.plot(x_array,y_arrayy,'y')
-
-
+#-----------------------------------------------------------
+#                            Plotting
+#-----------------------------------------------------------
+plt.plot(x_array,y_array,'c')
 plt.xlabel("x")
 plt.ylabel("y")
-#plt.legend(("knots","Actual function","python linear interpolation","my linear interpolation","python cubic interpolation","my cubic interpolation"),loc='best')
+plt.legend(("knots","Actual function","python linear interpolation","my linear interpolation","python cubic interpolation","my cubic interpolation"),loc='best')
 plt.ylim(-1,2)
 plt.title("Step Function")
 plt.show()
