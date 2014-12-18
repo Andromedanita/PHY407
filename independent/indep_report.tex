@@ -276,7 +276,13 @@ Figure below shows an example of running my code for bilinear interpolation. The
 \end{figure}
 \FloatBarrier
 
-
+\section{Conclusion}
+Cubic spline interpolation approximates the curve between data points much better than linear interpolation. The error in linear interpolation is of order two while the error in cubic spline interpolation is of order four. 
+Generalization of the error in polynomial interpolation:
+\begin{equation}
+f(x) - P_n(x) = \frac{(x-x_0)(x-x_1)...(x-x_n)}{(n+1)!}f^{(n+1)}(u_x)
+\end{equation}
+where $u_x$ is a point in the interval of interpolation.
 
 
 \section{References}
@@ -285,6 +291,7 @@ Figure below shows an example of running my code for bilinear interpolation. The
 \\3-http://en.wikipedia.org/wiki/Bilinear\_interpolation
 \\4-http://en.wikipedia.org/wiki/Spline\_interpolation
 \\5-http://homepage.math.uiowa.edu/~atkinson/ftp/ENA\_Materials/Overheads/sec\_4-2.pdf
+\\6-http://www-solar.mcs.st-andrews.ac.uk/~clare/Lectures/num-analysis/Numan\_chap3.pdf
 
 \end{document}
 
