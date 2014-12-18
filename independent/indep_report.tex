@@ -30,18 +30,18 @@
 \maketitle
 
 \section{Introduction}
-Most of the times in physics we are often given a few data points by sampling and experimenting and we need to estimate the values of our model between these points. The method commonly used to solve this problem in numerical analysis is interpolation. This is only an estimation. Interpolation is passing a curve from all the data points. There is one other case where interpolation becomes handy. For instance, we have a very complicated function to evaluate and if we want to evaluate it at all the points we want, it would take a long time to compute it and it is not efficient. In that case, we can take advantage of interpolation to estimate the value of the function at the points we want given a few points. This estimation for such a complex function might not be very accurate but the amount of computational time we save is much better than the accuracy we lose.
+In physics we are often given a few data points by sampling or experimenting and we need to estimate the values of our model between these points. The method commonly used to solve this problem in numerical analysis is interpolation. This is only an estimation so it introduces error to our calculation. Interpolation is passing a curve from all the data points. There is one other case where interpolation becomes handy. For instance, we have a very complicated function to evaluate and if we want to evaluate it at all the desired points it would take a long time to compute it and it is not efficient. In that case, we can take advantage of interpolation to estimate the value of the function at the points we want given the value of the function at only a few points. This estimation for such a complex function might not be very accurate but the amount of computational time we save is worth the accuracy we lose.
 
 \section{Interpolation Types}
 \subsection{Linear Interpolation}
-Linear interpolation is the simplest way of getting the values of a function in between points. Linear interpolation is a method to fit a curve to the points using linear functions. If we know the coordinates of two points as $A=(x_0,y_0)$ and $B=(x_1,y_1)$, the linear interpolation between these two points would simply be a straight line. Figure 1 shows the schematic view of the interpolation.
+Linear interpolation is the simplest way of getting the values of a function in between points. Linear interpolation is a method to fit a curve to the points using linear functions. If we know the coordinates of two points as $A=(x_0,y_0)$ and $B=(x_1,y_1)$, the linear interpolation between these two points would simply be a straight line. Figure 1 shows the schematic view of linear interpolation.
 
 %figure 1
 \FloatBarrier
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{linear_plot.png}
-\caption{Linear interpolation gives the value of point $C=(x_2,y_2)$.}
+\caption{We can calculate the value of $C=(x_2,y_2)$ using linear interpolation knowing the coordinates of $A=(x_0,y_0)$ and $B=(x_1,y_1)$.}
 \end{figure}
 \FloatBarrier
 
@@ -54,14 +54,14 @@ The equation of a straight line is given by:
 \begin{equation}
 y = y_0 +\frac{(x-x_0)(y_1-y_0)}{x_1-x_0}
 \end{equation}
-Therefore, having the values of the points A and B, we can compute the value of $y_2$ given the value of $x_2$.
+where $\frac{y_1-y_0}{x_1-x_0}$ is the slope of the line. Therefore, having the values of the points A and B, we can compute the value of $y_2$ given the value of $x_2$.
 This can be considered as the weighted average. The weights are inversely related to the distance from the end points to the unknown point; the closer point has more influence than the farther point. 
-Since this method only returns equation of lines in between each two points, the more the number of points available, the better the linear interpolation would be.
+Since this method only returns equation of lines in between each two points, the more the number of points available, the better the interpolation would be.
 The points are simply joined by straight line segments resulting in discontinuities at each point. 
 
 \subsubsection{Example}
 
-Figure 2 shows the $\sin(x)$ function and the interpolated curve using 10 knots both using my linear interpolation code and scipy 1d linear interpolation. Both interpolations are almost the same showing that my code is as good as scipy. The more knots we add, the better the interpolated values demonstrate the sin function. Figure 3 shows the same curves as figure 2 with 20 knots. We can see that the interpolated values are getting closer to the $\sin(x)$ function.
+Figure 2 shows the $\sin(x)$ function and the interpolated curves using 10 knots using my linear interpolation code and scipy 1d linear interpolation. Both interpolations are almost the same showing that my code is as good as scipy. The more knots we add, the better the interpolated values demonstrate the sin function. Figure 3 shows the same curves as figure 2 with 20 knots. We can see that the interpolated values are getting closer to the $\sin(x)$ function.
 
 
 
@@ -71,38 +71,40 @@ Figure 2 shows the $\sin(x)$ function and the interpolated curve using 10 knots 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{lin_sin.png}
-\caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This included 10 knots.}
+\caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This is generated using 10 knots.}
 \end{figure}
 \FloatBarrier
-The interpolated values using Scipy linear 1d interpolation is very similar to the values I got from my linear interpolation code.The mean value of the difference between the Python linear interpolation and my interpolation method is $\sim 1.735 \times 10^{-17}$. Linear interpolation just gives us an overall shape of the function, it is not very accurate since it only uses straight lines between each points, so it would not be a smooth function. However, as we add more knots it would seem smoother and more similar to the actual function.
 
 %figure 2
 \FloatBarrier
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{lin_sin_morepoints.png}
-\caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This is similar to previous figure except this is with more knots. This has 20 knots rather than 10 in the previous figure. We can see that the interpolated curves are getting closer to the function.}
+\caption{The interpolated values from my code and scipy module are very similar that they go on top of one another. This is similar to previous figure except this is with more knots. This has 20 knots compared to 10 in the previous figure. We can see that the interpolated curves are getting closer to the function.}
 \end{figure}
 \FloatBarrier
+The interpolated values using Scipy linear 1d interpolation is very similar to the values I got from my linear interpolation code.The mean value of the difference between the Python linear interpolation and my interpolation method is $\sim 1.735 \times 10^{-17}$. Linear interpolation just gives us an overall shape of the function, it is not very accurate since it only uses straight lines between each points, so it would not be a smooth function. However, as we add more knots it would seem smoother and more similar to the actual function.
 
 
 \subsubsection{Error Analysis}
-The error on linear interpolation is of order of $O(h^2)$. It has the form of:
+The error on linear interpolation is of order of $O(h^2)$, which means the error is proportional to the square of the distance between the data points. It has the form of:
 \begin{equation}
 f(x)-P_1(x) = \frac{(x-x_0)(x-x_1)}{2}f''(c_x)
 \end{equation}
-where $P_1(x)$ is the interpolation function in the interval $[a,b]$ and $c_x$ is a point in this interval.  This can be obtained writing $f(a)$ and $f(b)$ using Taylor series approximation and writing $P(x) = \frac{(x-x_1)}{x_0-x_1}f(x_0) + \frac{(x-x_0)}{(x_1-x_0)}f(x_1)$. Then we can substitute for $f(a)$ and $f(b)$ in $P(x)$ and get the following:
+where $P_1(x)$ is the interpolation function in the interval $[a,b]$ and $c_x$ is a point in this interval.  This can be obtained writing $f(a)$ and $f(b)$ as their Taylor series approximation and writing $P(x) = \frac{(x-x_1)}{x_0-x_1}f(x_0) + \frac{(x-x_0)}{(x_1-x_0)}f(x_1)$. Then we can substitute for $f(a)$ and $f(b)$ in $P(x)$ and get the following:
 \begin{equation}
 f(x)-P_1(x) = \frac{1}{2}(x-b)(x-a)f''(x)+...
 \end{equation}
-To give a rough estimate of the error in the $\sin(x)$ function using 20 knots and 30 points in between the knots, take the following assumptions:
+To give a rough estimate of the error in the $\sin(x)$ function using 20 knots and 30 points in between the knots, we get the following values for the first two knots and a point in between:
 \\$a=0$
 \\$b=0.34210526$
 \\$u_x=0.23344828$
+\\$|f(x)-P_1(x)| = |\frac{1}{2} (0.23344828-0) (0.23344828-0.34210526) (-\sin(0.23344828)) |$
 \\Therefore, the error would be $\sim 0.003$
 
 \subsection{Cubic Spline Interpolation}
-Cubic spline interpolation is a more accurate and advanced way of fitting a curve to data points than the linear interpolation. We need to make sure the piecewise curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where cubic spline name comes from. \subsubsection{Mathematical Approach}
+Cubic spline interpolation is a more accurate and advanced way of fitting a curve to data points than the linear interpolation. We need to make sure the piecewise curves passing through the points have continuous second derivative at the knots. For this purpose, we need to use polynomials that are of order 3 or higher and that is where the name cubic comes from.
+\subsubsection{Mathematical Approach}
 The aim is to fit a curve passing through points $(x_i,y_i)$ where $i=0,1,...,n$, so we interpolate between points $(x_{i-1},y_{i-1})$ and $(x_i,y_i)$ with polynomials $y_i = q_i(x)$.
 
 
@@ -134,7 +136,7 @@ For the two knots at both ends, the condition is different and we have:
 \frac{1}{x_n-x_{n-1}}k_{n-1} + \frac{2}{x_n-x_{n-1}}k_n = 3\frac{y_n-y_{n-1}}{(x_n-x_{n-1})^2}
 \end{equation}
 
-Equations 3 and 4 give us two more equations and along with the previous $n-1$ equations we would have $n+1$ equations to solve for $k_0$,$k_1$,..,$k_n$ values. The cubic spline’s coefficients can be found by solving a tridiagonal linear system. 
+Equations 7 and 8 give us two more equations which along with the previous $n-1$ equations from 6 we would have $n+1$ equations to solve for $k_0$,$k_1$,..,$k_n$ values. The cubic spline’s coefficients can be found by solving a tridiagonal linear system:
 %equation, matrix form
 \begin{equation}
 \begin{bmatrix}
@@ -186,12 +188,10 @@ where t is:
 t = \frac{x-x_{i-1}}{x_i - x_{i-1}}
 \end{equation}
 
-This will give us a function q for the points between each two knots, so we will have n different functions for the n+1 knots.
+This will give us a function $q$ for the points between each two knots, so we will have $n$ different functions for the $n+1$ knots.
 
 \subsubsection{Example}
-Figure  4 shows a prime example of using cubic spline method to get the values using only 5 arbitrary knots.
-\\As you can see in figure 5, the Python built-in interpolation function does a better job in cubic spline interpolation than my code. The zoomed in figure shows that my interpolation is still very close to the actual function even though it differs a bit from the function and the python interpolated function.
-
+Figure  4 shows a prime example of using my cubic spline code to get the values using only 5 arbitrary knots.
 
 %figure 4, arbitrary cubic interpolation
 \FloatBarrier
@@ -201,22 +201,24 @@ Figure  4 shows a prime example of using cubic spline method to get the values u
 \caption{Interpolation of 5 arbitrary points using my code for cubic spline interpolation.}
 \end{figure}
 \FloatBarrier
+Figure 5 shows the $\sin(x)$ function and its cubic interpolated values. As you can see, the Python built-in interpolation function does a better job in cubic spline interpolation than my code. The zoomed in figure shows that my interpolation is still very close to the actual function even though it differs a bit from the function and the python interpolated function.
+
 
 %figure 5
 \FloatBarrier
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.09]{cubic_compared_final.png}
-\caption{Upper: Knots are shown in green dots, red is the actual sin(x) function and blue and green are my interpolated function and Python built-in interpolation function, respectively. Lower: Zoomed in version of the figure above. Python built-in function does a better job in cubic spline interpolation.}
+\caption{Upper: Knots are shown in green dots, red is the actual sin(x) function and blue and green are my interpolated function and Python built-in interpolation function, respectively. Lower: Zoomed in version of the figure above. Python built-in function does a better job in cubic spline interpolation than my code.}
 \end{figure}
 \FloatBarrier
 
 \subsubsection{Error Analysis}
-The error in cubic spline interpolation is of order $O(h^4)$. The error would be the maximum difference between the value of the function we are approximating and our interpolated value. The error in cubic spline is given by:
+The error in cubic spline interpolation is of order $O(h^4)$. The error would be the maximum difference between the value of the function we are approximating and our interpolated value. The error is given by:
 \begin{equation}
 \left | s-f \right | \sim \frac{5}{384}. \left | f^{(4)} \right |. h^4
 \end{equation}
-where $s-f$ is the difference between interpolated and the function value, $f^{(4)}$ is the value of fourth derivative of the function and h is the spacing between knots.
+where $|s-f|$ is the difference between interpolated and the function value, $f^{(4)}$ is the value of fourth derivative of the function and h is the spacing between knots.
 For example, if we do the interpolation on the function $y(x) = \sin(x)$ over the interval [0,3] with $h$= 0.1, what would the error be?
 \\We know $f^{(4)}(x)$ = $\sin(x)$; therefore, $f^{(4)}(x) \leq$ 1. So the value of the error would be:
 \\ $\frac{5}{384}.1.(0.1)^4$ $\approx$ $\frac{1}{768000} \approx 1.3 \times 10^{-6}$. This error is very small so the cubic spline interpolation is a good approximation of the function. 
@@ -288,7 +290,7 @@ In this section, I will test my code for different functions and compare it with
 \FloatBarrier
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{step2.png}
+\includegraphics[scale=0.5]{step201.png}
 \caption{15 knots and 20 points in between.}
 \end{figure}
 \FloatBarrier
@@ -296,7 +298,7 @@ In this section, I will test my code for different functions and compare it with
 \FloatBarrier
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{step5.png}
+\includegraphics[scale=0.5]{step1001.png}
 \caption{15 knots and 100 points in between.}
 \end{figure}
 \FloatBarrier
