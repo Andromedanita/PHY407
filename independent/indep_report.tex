@@ -329,12 +329,14 @@ Figure 12 shows the function $e^{-4x^2}$ and the interpolated values. My cubic s
 
 
 \section{Conclusion}
+Interpolation is a great tool in numerical analysis. It estimates the values of a function if we know the values of the function for only a few points. This introduces error to the calculations but the computation time it saves is worth loosing a bit of accuracy.
 Cubic spline interpolation approximates the curve between data points much better than linear interpolation. The error in linear interpolation is of order two while the error in cubic spline interpolation is of order four. In one of the examples we saw that the error was 1000 times smaller in cubic spline method than the linear interpolation method.
 Generalization of the error in polynomial interpolation:
 \begin{equation}
 f(x) - P_n(x) = \frac{(x-x_0)(x-x_1)...(x-x_n)}{(n+1)!}f^{(n+1)}(u_x)
 \end{equation}
 where $u_x$ is a point in the interval of interpolation.
+\\My code for linear and bilinear interpolation has almost the same accuracy as the scipy 1d and 2d interpolation modules; however my cubic spline interpolation is a small bit different from that of the scipy. This difference is very small as shows in figure 6 and can be considered as good approximation of the curve. It does not work as well for step function and it might be due to the discontinuity problems of the step function that scipy is taking into account.
 
 
 \section{References}

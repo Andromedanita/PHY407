@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  19 DEC 2014 11:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  19 DEC 2014 12:10
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -976,24 +976,24 @@ Package pdftex.def Info: exponential.png used on input line 325.
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.334 \begin{equation}
+l.335 \begin{equation}
                       pdfTeX warning (ext4): destination with the same identifi
 er (name{figure.12}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.334 \begin{equation}
+l.335 \begin{equation}
                        <./step1001.png> <./exponential.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 349.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 351.
  [13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 349.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 351.
 
 (./indep_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 349.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 349.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 351.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 351.
 Package rerunfilecheck Info: File `indep_report.out' has not changed.
 (rerunfilecheck)             Checksum: 213A34E6BF6334DAE08644CDEEE86C78;1040.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 349.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 351.
  ) 
 Here is how much of TeX's memory you used:
  8126 strings out of 493117
@@ -1014,7 +1014,7 @@ al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
 texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
 live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
 ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on indep_report.pdf (13 pages, 1082697 bytes).
+Output written on indep_report.pdf (13 pages, 1083317 bytes).
 PDF statistics:
  242 PDF objects out of 1000 (max. 8388607)
  191 compressed objects within 2 object streams
