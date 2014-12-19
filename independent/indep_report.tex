@@ -60,8 +60,8 @@ Since this method only returns equation of lines in between each two points, the
 The points are simply joined by straight line segments resulting in discontinuities at each point. 
 
 \subsubsection{Example}
-
-Figure 2 shows the $\sin(x)$ function and the interpolated curves using 10 knots using my linear interpolation code and scipy 1d linear interpolation. Both interpolations are almost the same showing that my code is as good as scipy. The more knots we add, the better the interpolated values demonstrate the sin function. Figure 3 shows the same curves as figure 2 with 20 knots. We can see that the interpolated values are getting closer to the $\sin(x)$ function.
+\textbf{Code: linear.py}
+\\Figure 2 shows the $\sin(x)$ function and the interpolated curves using 10 knots using my linear interpolation code and scipy 1d linear interpolation. Both interpolations are almost the same showing that my code is as good as scipy. The more knots we add, the better the interpolated values demonstrate the sin function. Figure 3 shows the same curves as figure 2 with 20 knots. We can see that the interpolated values are getting closer to the $\sin(x)$ function.
 
 
 
@@ -191,7 +191,8 @@ t = \frac{x-x_{i-1}}{x_i - x_{i-1}}
 This will give us a function $q$ for the points between each two knots, so we will have $n$ different functions for the $n+1$ knots.
 
 \subsubsection{Example}
-Figure  4 shows a prime example of using my cubic spline code to get the values using only 5 arbitrary knots.
+\textbf{Code:cubic\_spline.py}
+\\Figure  4 shows a prime example of using my cubic spline code to get the values using only 5 arbitrary knots.
 
 %figure 4, arbitrary cubic interpolation
 \FloatBarrier
@@ -282,7 +283,8 @@ This could have been done by doing the linear interpolation first in y direction
 \FloatBarrier
 
 \subsubsection{Example}
-Figure 9 shows an example of running my code for bilinear interpolation. The four points given are located at the sides of a unit square and the $Q_{11}$, $Q_{12}$, $Q_{21}$ and $Q_{22}$ values are 0,1,1,0.5, respectively. I have compared the values I got for interpolation using my own code with the values from scipy 2d interpolation and the two plots seem very similar. The mean value of the absolute value of the difference between the values of the two is $\sim 1.998 \times 10^{-17}$.
+\textbf{Code:bilinear.py}
+\\Figure 9 shows an example of running my code for bilinear interpolation. The four points given are located at the sides of a unit square and the $Q_{11}$, $Q_{12}$, $Q_{21}$ and $Q_{22}$ values are 0,1,1,0.5, respectively. I have compared the values I got for interpolation using my own code with the values from scipy 2d interpolation and the two plots seem very similar. The mean value of the absolute value of the difference between the values of the two is $\sim 1.998 \times 10^{-17}$.
 
 %contour plot
 \FloatBarrier
@@ -295,7 +297,8 @@ Figure 9 shows an example of running my code for bilinear interpolation. The fou
 
 
 \section{Analysis}
-In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figures 10 and 11 show the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. However, no matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of the step function linear interpolation does a better job both in the case of my code and scipy code and the scipy does a better job in cubic interpolation than my code.
+\textbf{Code: step\_function.py and exponential.py}
+\\In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figures 10 and 11 show the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. However, no matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of the step function linear interpolation does a better job both in the case of my code and scipy code and the scipy does a better job in cubic interpolation than my code.
 
 \FloatBarrier
 \begin{figure}[H]
@@ -326,7 +329,7 @@ Figure 12 shows the function $e^{-4x^2}$ and the interpolated values. My cubic s
 
 
 \section{Conclusion}
-Cubic spline interpolation approximates the curve between data points much better than linear interpolation. The error in linear interpolation is of order two while the error in cubic spline interpolation is of order four. 
+Cubic spline interpolation approximates the curve between data points much better than linear interpolation. The error in linear interpolation is of order two while the error in cubic spline interpolation is of order four. In one of the examples we saw that the error was 1000 times smaller in cubic spline method than the linear interpolation method.
 Generalization of the error in polynomial interpolation:
 \begin{equation}
 f(x) - P_n(x) = \frac{(x-x_0)(x-x_1)...(x-x_n)}{(n+1)!}f^{(n+1)}(u_x)
