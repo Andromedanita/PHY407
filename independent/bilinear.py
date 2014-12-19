@@ -51,6 +51,7 @@ y1  = 0.
 x2  = 1.
 y2  = 1.
 
+#making points in the required form
 points = [(x1,y1,Q11),(x1,y2,Q12),(x2,y1,Q21),(x2,y2,Q22)]
 
 #number of points to interpolate
@@ -67,7 +68,7 @@ for i in range(n):
     for j in range(n):
         table[i][j] = bilinear(xvals[i],yvals[j],points)
 
-
+#the same points for using in 2d interp in scipy
 xx = [0.,1.]
 yy = [0.,1.]
 z  = [[0.,1.],[1.,0.5]]

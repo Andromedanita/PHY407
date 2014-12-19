@@ -1,7 +1,7 @@
 '''
-    Anita Bahmanyar
-    Comparing linear and cubic interpolation methods using my and scipy module for step function.
-    '''
+Anita Bahmanyar
+Comparing linear and cubic interpolation methods using my and scipy module for an exponential function.
+'''
 import numpy as np
 import matplotlib.pylab as plt
 from   scipy import interpolate
@@ -57,6 +57,10 @@ py_interp_lin = f(xvals)
 py_interp_cub = ff(xvals)
 
 
+
+#-----------------------------------------------------------
+#                            Plotting
+#-----------------------------------------------------------
 plt.ion()
 plt.plot(x_array,y_array,'bo')
 plt.plot(x_array,y_array,'b')
@@ -68,7 +72,6 @@ plt.plot(xvals,py_interp_cub,'m')
 #-----------------------------------------------------------
 #                   Cubic Spline Interpolation
 #-----------------------------------------------------------
-
 
 n = 5
 points = np.array([[x_array[0],y_array[0]],[x_array[1],y_array[1]],[x_array[2],y_array[2]],[x_array[3],y_array[3]],[x_array[4],y_array[4]],[x_array[5],y_array[5]],[x_array[6],y_array[6]],[x_array[7],y_array[7]],[x_array[8],y_array[8]],[x_array[9],y_array[4]]])
@@ -124,20 +127,10 @@ for h in range(len(x_array)):
         m+=1
 
 
-plt.plot(x_array,y_array,'c')
-
 #-----------------------------------------------------------
 #                            Plotting
 #-----------------------------------------------------------
-'''
-plt.ion()
-plt.plot(x_array,y_array,'bo')
-plt.plot(x_array,y_array,'b')
-plt.plot(xvals,py_interp_lin,'g')
-plt.plot(xvals,yvals,'r')
-plt.plot(xvals,py_interp_cub,'m')
-plt.plot(x_array,y_arrayy,'y')
-'''
+plt.plot(x_array,y_array,'c')
 plt.xlabel("$x$",fontsize=15)
 plt.ylabel("$y$",fontsize=15)
 

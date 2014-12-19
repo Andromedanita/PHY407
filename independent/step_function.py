@@ -58,6 +58,9 @@ py_interp_lin = f(xvals)
 py_interp_cub = ff(xvals)
 
 
+#-----------------------------------------------------------
+#                            Plotting
+#-----------------------------------------------------------
 plt.ion()
 plt.plot(x_array,y_array,'bo')
 plt.plot(x_array,y_array,'b')

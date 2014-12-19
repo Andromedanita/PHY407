@@ -1,7 +1,10 @@
+'''
+Anita Bahmanyar
+Linear interpolation
+'''
 import numpy as np
 import matplotlib.pylab as plt
 from   scipy import interpolate
-
 
 #-----------------------------------------------------------
 #                           Function
@@ -19,16 +22,14 @@ def lin_interp(x,x0,y0,x1,y1):
 #-----------------------------------------------------------
 #                       Code Starts Here
 #-----------------------------------------------------------
-x_array = np.linspace(0.,6.5,20)
+N       = 20  #number of knots
+num     = 30  #number of points in between knots
+x_array = np.linspace(0.,6.5,N)
 y_array = np.sin(x_array)
-xvals   = np.linspace(0.01,6.49,30)
+xvals   = np.linspace(0.01,6.49,num)
+yvals   = np.zeros(num)
 
-
-
-n = len(xvals)
-yvals = np.zeros(n)
-
-
+#assigning interpolated values to y_array
 for h in range(len(xvals)):
     print h
     m = 0
@@ -37,11 +38,14 @@ for h in range(len(xvals)):
             yvals[h] = lin_interp(xvals[h],x_array[m],y_array[m],x_array[m+1],y_array[m+1])
         m+=1
 
-
+#scipy linear interpolation function
 f = interpolate.interp1d(x_array,y_array,kind='linear')
+#scipy linear interpolation values
 py_interp = f(xvals)
 
-#plotting
+#-----------------------------------------------------------
+#                     Plotting
+#-----------------------------------------------------------
 plt.ion()
 plt.plot(x_array,y_array,'bo')
 plt.plot(xvals,py_interp,'c')
@@ -50,5 +54,6 @@ plt.plot(xvals,np.sin(xvals),'g')
 plt.xlabel("x")
 plt.ylabel("y")
 plt.legend(("knots","python interpolated values","my interpolated values","Actual function"),loc='best')
-
 plt.show()
+
+
