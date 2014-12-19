@@ -75,7 +75,7 @@ Figure 2 shows the $\sin(x)$ function and the interpolated curves using 10 knots
 \end{figure}
 \FloatBarrier
 
-%figure 2
+%figure 3
 \FloatBarrier
 \begin{figure}[H]
 \centering
@@ -220,10 +220,11 @@ The error in cubic spline interpolation is of order $O(h^4)$. The error would be
 \end{equation}
 where $|s-f|$ is the difference between interpolated and the function value, $f^{(4)}$ is the value of fourth derivative of the function and h is the spacing between knots.
 For example, if we do the interpolation on the function $y(x) = \sin(x)$ over the interval [0,3] with $h$= 0.1, what would the error be?
+
 \\We know $f^{(4)}(x)$ = $\sin(x)$; therefore, $f^{(4)}(x) \leq$ 1. So the value of the error would be:
 \\ $\frac{5}{384}.1.(0.1)^4$ $\approx$ $\frac{1}{768000} \approx 1.3 \times 10^{-6}$. This error is very small so the cubic spline interpolation is a good approximation of the function. 
 
-Now to see how good it works, I have applied the code to do the interpolation for the function $\sin(x)$ in the interval [0,6.5] with 20 points, so $h$ = 0.325 here. So the error would be $\sim 1.46 \times 10^{-4}$. This is still quite a small error.
+Now to see how accurate my code is, I have applied the code to do the interpolation for the function $\sin(x)$ in the interval [0,6.5] with 20 points, so $h$ = 0.325 here. So the error would be $\sim 1.46 \times 10^{-4}$. This is still quite a small error.
 
 \subsection{Bilinear Interpolation}
 Bilinear interpolation is the same as linear interpolation which is extended into two dimensions. Unlike 1D interpolation where you entered $x$ values and got $y=f(x)$ values out, this would require you to enter $x$ and $y$ values to get the value of the function $z = f(x,y)$ out. Figure 6 shows a schematic view of bilinear interpolation.
@@ -285,7 +286,7 @@ Figure 8 shows an example of running my code for bilinear interpolation. The fou
 
 
 \section{Analysis}
-In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figures 9 and 10 show the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. However, no matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of step function linear interpolation does a better job both in the case of my code and scipy code and the scipy does a better job in cubic interpolation than my code.
+In this section, I will test my code for different functions and compare it with scipy interpolation modules. Figures 9 and 10 show the step function curve, its linear and cubic interpolation values using both my code and scipy module. The two plots show the same curves using 15 knots, 20 and 100 points in between, respectively. We can see that as we keep the number of knots the same and increase the number of points in between the knots, we get a better approximation of the step function. However, no matter how many points we add in between knots, there is always an effect at the edges called Gibb's phenomena which is due to the discontinuity of the step function. In the case of the step function linear interpolation does a better job both in the case of my code and scipy code and the scipy does a better job in cubic interpolation than my code.
 
 \FloatBarrier
 \begin{figure}[H]
@@ -310,7 +311,7 @@ Figure 11 shows the function $e^{-4x^2}$ and the interpolated values. My cubic s
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.45]{exponential.png}
-\caption{$e^{4x^2}$ function along with linear and cubic spline interpolation using both my code and scipy. The linear interpolation using my code and scipy do match up exactly while the cubic spline interpolations differ.}
+\caption{$e^{4x^2}$ function along with linear and cubic spline interpolation using both my code and scipy. The linear interpolation using my code and scipy match up exactly while the cubic spline interpolations differ.}
 \end{figure}
 \FloatBarrier
 
