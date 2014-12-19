@@ -117,6 +117,7 @@ x_array = np.linspace(0.01,3.99,N)
 y_array = np.zeros(N)
 
 
+#generating y_array to hold interpolated values
 for h in range(len(x_array)):
     print h
     m = 1

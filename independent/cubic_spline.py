@@ -1,3 +1,10 @@
+'''
+Anita Bahmanyar
+Cubic spline interpolation
+Based on equations from:
+http://en.wikipedia.org/wiki/Spline_interpolation
+'''
+
 import numpy as np
 import matplotlib.pylab as plt
 from   scipy import interpolate
@@ -82,6 +89,7 @@ n      = 20
 #points = np.array([[-1.,0.5],[0.0,0.0],[1.0,0.5],[2.0,-0.3],[3.0,3.0]])
 xx = np.linspace(0.0,6.5,n)
 yy = np.sin(xx)
+#knots to use for interpolation
 points = np.array([[xx[0],yy[0]],[xx[1],yy[1]],[xx[2],yy[2]],[xx[3],yy[3]],[xx[4],yy[4]],[xx[5],yy[5]],[xx[6],yy[6]],[xx[7],yy[7]],[xx[8],yy[8]],[xx[9],yy[9]],[xx[10],yy[10]],[xx[11],yy[11]],[xx[12],yy[12]],[xx[13],yy[13]],[xx[14],yy[14]],[xx[15],yy[15]],[xx[16],yy[16]],[xx[17],yy[17]],[xx[18],yy[18]],[xx[19],yy[19]]])
 
 a      = np.zeros([n,n])
@@ -126,7 +134,7 @@ N = 25
 x_array = np.linspace(0.01,6.49,N)
 y_array = np.zeros(N)
 
-
+#generating y_array which includes interpolated values
 for h in range(len(x_array)):
     print h
     m = 1
@@ -135,13 +143,19 @@ for h in range(len(x_array)):
             y_array[h] = q(points[m-1][1],points[m][1],ai[m],bi[m],t(x_array[h],points[m-1][0],points[m][0]))
         m+=1
 
-
+#----------------------------------------------------------------
+#                   Scipy Interpolation
+#----------------------------------------------------------------
 actual_func = np.sin(x_array)
-o = interpolate.interp1d(points.T[0],points.T[1],kind='cubic')
-py_interp = o(x_array)
+o           = interpolate.interp1d(points.T[0],points.T[1],kind='cubic')
+py_interp   = o(x_array)
 
+#difference in scipy and my code values
 diff = py_interp - y_array
 
+#----------------------------------------------------------------
+#                        Plotting
+#----------------------------------------------------------------
 plt.ion()
 plt.plot(points.T[0],points.T[1],'go')
 plt.plot(x_array,y_array)
@@ -154,7 +168,7 @@ plt.ylabel("y")
 plt.legend(("knots","interpolated function","python interpolation","sin(x) function"),loc='best')
 plt.title("Interpolation of sin(x) function")
 
-
+#plotting the difference error vs x array
 plt.figure(2)
 plt.plot(x_array,diff,'o')
 plt.xlabel("$x$")

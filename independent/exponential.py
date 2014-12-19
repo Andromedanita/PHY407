@@ -57,7 +57,6 @@ py_interp_lin = f(xvals)
 py_interp_cub = ff(xvals)
 
 
-
 #-----------------------------------------------------------
 #                            Plotting
 #-----------------------------------------------------------
@@ -67,7 +66,6 @@ plt.plot(x_array,y_array,'b')
 plt.plot(xvals,py_interp_lin,'g')
 plt.plot(xvals,yvals,'r')
 plt.plot(xvals,py_interp_cub,'m')
-
 
 #-----------------------------------------------------------
 #                   Cubic Spline Interpolation
@@ -118,6 +116,7 @@ N = 15
 x_array = np.linspace(-0.99,3.99,N)
 y_array = np.zeros(N)
 
+#generating y array to hold interpolated values
 for h in range(len(x_array)):
     print h
     m = 1
@@ -133,7 +132,6 @@ for h in range(len(x_array)):
 plt.plot(x_array,y_array,'c')
 plt.xlabel("$x$",fontsize=15)
 plt.ylabel("$y$",fontsize=15)
-
 plt.legend(("knots","Actual function","python linear interpolation","my linear interpolation","python cubic interpolation","my cubic interpolation"),loc='best')
 plt.title("$e^{(-4x^2)}$",fontsize=20)
 plt.show()

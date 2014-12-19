@@ -9,13 +9,12 @@ from   scipy import interpolate
 #-----------------------------------------------------------
 #                           Function
 #-----------------------------------------------------------
+#linear interpolation function
 def lin_interp(x,x0,y0,x1,y1):
     '''
     linear interpolation between points (x0,y0) and (x1,y1)
     '''
-
     y = y0 + (y1-y0)*((x-x0)/(x1-x0))
-
     return y
 
 
