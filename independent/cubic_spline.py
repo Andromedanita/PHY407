@@ -78,7 +78,7 @@ def t(x,xi_1,xi):
 #----------------------------------------------------------------
 
 #number of points
-n      = 5
+n      = 20
 #points = np.array([[-1.,0.5],[0.0,0.0],[1.0,0.5],[2.0,-0.3],[3.0,3.0]])
 xx = np.linspace(0.0,6.5,n)
 yy = np.sin(xx)
@@ -123,7 +123,7 @@ for j in range(1,n,1):
 #number of points in xarray
 N = 25
 #an array of x values to get the y values out
-x_array = np.linspace(-0.99,2.99,N)
+x_array = np.linspace(0.01,6.49,N)
 y_array = np.zeros(N)
 
 
@@ -140,16 +140,25 @@ actual_func = np.sin(x_array)
 o = interpolate.interp1d(points.T[0],points.T[1],kind='cubic')
 py_interp = o(x_array)
 
+diff = py_interp - y_array
+
 plt.ion()
 plt.plot(points.T[0],points.T[1],'go')
 plt.plot(x_array,y_array)
 plt.plot(x_array,py_interp)
 plt.plot(x_array,actual_func)
-plt.xlim(-1.5,3.7)
-plt.ylim(-1.5,3.5)
+plt.xlim(0.,6.7)
+plt.ylim(-1.5,1.5)
 plt.xlabel("x")
 plt.ylabel("y")
 plt.legend(("knots","interpolated function","python interpolation","sin(x) function"),loc='best')
 plt.title("Interpolation of sin(x) function")
+
+
+plt.figure(2)
+plt.plot(x_array,diff,'o')
+plt.xlabel("$x$")
+plt.ylabel("difference")
+plt.title("difference between my cubic and scipy cubic interpolation code")
 plt.show()
 
